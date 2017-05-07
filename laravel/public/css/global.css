@@ -1,0 +1,36 @@
+body{
+    background-color: #9DA2AB;
+    font-family: Microsoft JhengHei UI;
+    color: #423F47;
+}
+
+.naslov{
+    font-size: 35px;
+    padding: 10px;
+    border-bottom: 2px solid #423F47;
+}
+
+.labela {
+    color: white;
+    font-size: 20px;
+}
+
+.polja{
+    background-color: #B1B7BB;
+}
+
+.loginForm{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.loginButton{
+    padding: 10px 20px 10px 20px;
+    background-color: #423F47;
+    color: white;
+}
+
+.login_wrapper{
+    width: 50%;
+    margin: 0 auto;
+}
