@@ -2,12 +2,15 @@ body{
     background-color: #9DA2AB;
     font-family: Microsoft JhengHei UI;
     color: #423F47;
+    font-size: 18px;
 }
 
 .naslov{
     font-size: 35px;
     padding: 10px;
     border-bottom: 2px solid #423F47;
+    margin-top: 5%;
+    margin-left: 25%;
 }
 
 .labela {
@@ -17,20 +20,62 @@ body{
 
 .polja{
     background-color: #B1B7BB;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 7%;
+    box-shadow: 0px 5px 5px 1px #83878e;
+    padding: 5px;
 }
 
 .loginForm{
-    width: 50%;
-    margin: 0 auto;
+    width: 30% !important;
+    padding-top: 10%;
 }
 
 .loginButton{
-    padding: 10px 20px 10px 20px;
+    padding: 10px 30px 10px 30px;
     background-color: #423F47;
     color: white;
+    margin-top: 5%;
+    font-size: 18px;
 }
 
 .login_wrapper{
+}
+
+.center{
     width: 50%;
     margin: 0 auto;
+}
+
+a:link{
+    color: #423F47;
+}
+
+a:visited {
+    color: #423F47;
+}
+
+.logo{
+    padding-right: 10px;
+    margin-left: 10%;
+}
+
+.reg_link{
+    float: right;
+    padding: 20px 0 20px 0;
+}
+
+.errorMsg{
+    color: red;
+    margin-top: 3%;
+    width: 60%;
+}
+
+.header{
+    border-bottom: 3px solid #423F47;
+}
+
+.sidebar{
+    background-color: #423F47;
 }
