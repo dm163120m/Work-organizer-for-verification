@@ -9,8 +9,24 @@
 @yield('header')
 
 <div class="container">
-    @yield('sidebar')
-    @yield('content')
+    <div class="sidebar col-md-12">
+        <div class="sidebar-nav col-md-12">
+            <a href="#">Home</a>
+            <a href="#">My Tasks</a>
+            <a href="#">Tests</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="col-md-2">
+            @yield('list')
+        </div>
+        <div class="col-md-7 page">
+            @yield('page')
+        </div>
+        <div class="col-md-3">
+            @yield('filter')
+        </div>
+    </div>
 </div>
 </body>
 </html>
