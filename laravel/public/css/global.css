@@ -99,7 +99,7 @@ a:visited {
     height: 150px;
 }
 .sidebar{
-    height:90vh;
+    height:120vh;
     background-color: #423F47;
     width:200px;
     display: inline-block;
@@ -137,9 +137,61 @@ a:visited {
     background-color: #FFFFFF;
     min-height: 800px;
 }
+.page-title{
+    text-align: center;
+    color: #95989A;
+}
+.group{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.indexer{
+    padding-top: 23px;
+    text-align: center;
+    color: #95989A;
+}
 .container{
     width:100%;
     margin:0px;
     padding:0px;
     
+}
+.formselect{
+    height:35px;
+    margin-top:-5px;
+}
+.formbutton{
+    background-color: #423F47;
+    border-width:0px;
+    color:white;
+    height:60px;
+}
+.sidebar-tsk {
+    margin: 0px;
+    padding: 0px;
+    display:block;
+    height:105vh;
+    background-color: #b5aea3; 
+    font-size: 15px;
+    border-color: #888a85;
+    text-align: center;
+    border-left: 3px solid #56452C;
+    text-align: left;
+    text-decoration: none;
+}
+.sidebar-tsk a:active{
+    background-color: #95989A;
+}
+.sidebar-tsk a:hover {
+    
+}
+.task_li{
+    border-bottom: 1px solid whitesmoke;
+}
+.task_li:hover{
+    background-color: white;
+}
+.tasks_ul{
+    list-style-type: none;
+    padding-left: 0;
 }
