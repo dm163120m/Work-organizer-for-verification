@@ -37,13 +37,14 @@
         </div>
         <div class="group col-md-12">
             <p class="col-md-2">Author:</p>
-            <p style="color: #95989A;" class="col-md-4">Jeca Jelenic</p>
+            <p style="color: #95989A;" class="col-md-4">{{$data['firstName']}} {{$data['secondName']}}</p>
             <p class=" col-md-2" type="label">Asign To:<b style="color:red;">*</b></p>
             <select class="formselect col-md-4" placeholder="Choose a Junior">
                 <option value="" disabled selected>Choose a Junior</option>
-                <option></option>
-                <option></option>
-                <option></option>
+                @foreach ($data['juniors'] as $junior)
+                    <option value={{$junior['username']}} >{{$junior['Name']}} {{$junior['Surname']}}</option>
+                @endforeach
+
             </select>
         </div>
         <div class="group col-md-12">

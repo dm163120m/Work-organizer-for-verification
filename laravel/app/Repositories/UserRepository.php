@@ -1,4 +1,6 @@
 <?php
+namespace App\Repositories;
+use App\User;
 
 class UserRepository {
     protected $model;
@@ -8,6 +10,15 @@ class UserRepository {
     }
 
     public function getAll(){
-        return $this->model->all();
+        return User::with('tasks')->get()->toArray();
     }
+
+    public function find($username){
+        return User::where('username',$username)->first()->getAttributes();
+    }
+
+    public function getJuniors(){
+        return User::where('role','junior')->get()->toArray();
+    }
+
 }

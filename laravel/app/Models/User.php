@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 class User extends Model implements AuthenticatableContract{
     use Authenticatable;
-    
+
     protected $table = 'users';
     /**
      * The attributes that should be hidden for arrays.
@@ -17,6 +17,10 @@ class User extends Model implements AuthenticatableContract{
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function tasks(){
+        return $this->hasMany('App\Task', 'id');
+    }
 
     public $timestamps = false;
     

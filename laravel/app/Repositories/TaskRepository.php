@@ -10,7 +10,16 @@ class TaskRepository{
     }
 
     public function getAll(){
-        $all = $this->model->all();
+        $all = Task::with('priority', 'status', 'author', 'assignee')->get();
         return $all->toArray();
     }
+
+    public function getMyTasks($username){
+        return Task::where('assignee', '=', $username)->with('priority', 'status', 'author', 'assignee')->get()->toArray();
+    }
+
+    public function find($id){
+        return Task::where('id',$id)->first()->getAttributes();
+    }
+
 }
