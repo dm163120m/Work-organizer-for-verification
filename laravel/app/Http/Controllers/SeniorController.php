@@ -53,7 +53,8 @@ class SeniorController extends Controller{
         $data['juniors'] = $this->userRepo->getJuniors();
         $data['groups'] = Group::all()->toArray();
         $data['groupsTests'] = Group::with('tests')->get()->toArray();
-        return view('senior/tasks')->with('data',$data);
+        $data['tests'] = $this->testRepo->getAll();
+        return view('senior/tests')->with('data',$data);
     }
 
     public function createTask(){
