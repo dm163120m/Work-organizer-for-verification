@@ -20,5 +20,7 @@ Route::post('/login', 'Auth\LoginController@loginPost');
 Route::get('/register', 'Auth\RegisterController@index');
 Route::post('/register', 'Auth\RegisterController@registerPost');
 Route::get('/junior', 'JuniorController@home');
-Route::get('/senior/createtask', 'SeniorController@createTask');
+Route::get('/senior/tasks', 'SeniorController@tasks');
+Route::get('/senior/tests', 'SeniorController@tests');
+
 

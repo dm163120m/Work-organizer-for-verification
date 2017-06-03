@@ -22,8 +22,8 @@
     <div class="sidebar col-md-12">
         <div class="sidebar-nav col-md-12">
             <a href="#">Home</a>
-            <a href="#">My Tasks</a>
-            <a href="#">Tests</a>
+            <a href="tasks#">My Tasks</a>
+            <a href="tests#">Tests</a>
         </div>
     </div>
     <div class="content">

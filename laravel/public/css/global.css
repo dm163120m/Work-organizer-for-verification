@@ -195,3 +195,14 @@ a:visited {
     list-style-type: none;
     padding-left: 0;
 }
+.hidden{
+    display:none;
+}
+.descriptionBox{
+    border-color:black;
+    border-width:1px;
+    color: #423F47;
+    height: 200px;
+    border-style:solid;
+    padding:15px;
+}
