@@ -1,9 +1,9 @@
-@extends('template')
+@extends('auth_template')
 
 	<div class="content">
 		@section('header')
 			@parent
-			<div class="naslov"><img class="logo" width="50px" height="50px" src="/images/logo.png" /><b>Work Organizer</b></div>
+			<div class="naslov"><div class="logo"><img src="/images/logo.png" /></div><b>Work Organizer</b></div>
 		@endsection
 		@section('content')
 		<div class="login_wrapper center">
@@ -18,7 +18,7 @@
 			<form class="center loginForm" method="post" action="{{ url('/login') }}" >
 				{!! csrf_field() !!}
 				<label class="labela" for="username">Username</label>
-				<input class="polja" id="username" name="username" value="" /><br/>
+				<input class="polja" id="username" name="username" value={{ old('username') == "/" ? "" : old('username') }} /><br/>
 				<label class="labela" for="password">Password</label>
 				<input class="polja" id="password" name="password" value="" type="password"/><br/>
 				<button class="loginButton" type="submit">Log in</button><br/>

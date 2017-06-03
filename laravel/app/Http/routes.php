@@ -18,5 +18,6 @@ Route::get('/', function () {
 Route::get('/login', 'Auth\LoginController@index');
 Route::post('/login', 'Auth\LoginController@loginPost');
 Route::get('/register', 'Auth\RegisterController@index');
+Route::post('/register', 'Auth\RegisterController@registerPost');
 Route::get('/junior', 'JuniorController@home');
 

@@ -8,8 +8,9 @@
 <body>
 @yield('header')
 
+@yield('sidebar')
+
 <div class="container">
-    @yield('sidebar')
     @yield('content')
 </div>
 </body>

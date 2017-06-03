@@ -1,4 +1,4 @@
-@extends('template')
+@extends('auth_template')
 
 <div class="content">
     @section('header')
@@ -18,19 +18,19 @@
             <form class="center loginForm" method="post" action="{{ url('/register') }}" >
                 {!! csrf_field() !!}
                 <label class="labela" for="username">Username</label>
-                <input class="polja" id="username" name="username" value="" /><br/>
+                <input class="polja" id="username" name="username" value={{ old('username') }} /><br/>
                 <label class="labela" for="name">Name</label>
-                <input class="polja" id="name" name="name" value="" /><br/>
+                <input class="polja" id="name" name="name" value={{ old('name') }} /><br/>
                 <label class="labela" for="surname">Surname</label>
-                <input class="polja" id="surname" name="surname" value="" /><br/>
+                <input class="polja" id="surname" name="surname" value={{ old('surname') }} /><br/>
                 <label class="labela" for="password">Password</label>
                 <input class="polja" id="password" name="password" value="" type="password"/><br/>
                 <label class="labela" for="confirmPassword">Confirm Password</label>
                 <input class="polja" id="confirmPassword" name="confirmPassword" value="" type="password"/><br/>
                 <label class="labela" for="email">Email</label>
-                <input class="polja" id="email" name="email" value=""/><br/>
+                <input class="polja" id="email" name="email" value={{ old('email') }}/><br/>
                 <label class="labela" for="image">Image</label>
-                <input class="polja" id="image" name="image" value=""/><br/>
+                <input class="polja" id="image" name="image" value={{ old('image') }}/><br/>
                 <select class="polja">
                     <option value="">Select role</option>
                     <option value="junior">Junior</option>

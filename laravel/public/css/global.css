@@ -4,7 +4,6 @@ body{
     color: #423F47;
     font-size: 18px;
 }
-
 .naslov{
     font-size: 35px;
     padding: 10px;
@@ -57,10 +56,32 @@ a:visited {
 }
 
 .logo{
-    padding-right: 10px;
-    margin-left: 10%;
+    width: 200px;
+    height: 150px;
+    margin-top: 35px;
+    text-align: center;
+    display: inline-block;
 }
-
+.userMenu{
+    margin-top: 25px;
+    margin-right:80px;
+    height: 150px;
+    display: inline-block;
+    float:right;
+}
+.userName{
+    display: inline-block;
+}
+.avatar{
+    margin-left: 50px;
+    border-radius: 50px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #423F47;
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+}
 .reg_link{
     float: right;
     padding: 20px 0 20px 0;
@@ -73,9 +94,52 @@ a:visited {
 }
 
 .header{
+    width:100%;
     border-bottom: 3px solid #423F47;
+    height: 150px;
 }
-
 .sidebar{
+    height:90vh;
     background-color: #423F47;
+    width:200px;
+    display: inline-block;
+    padding: 0px;
+}
+.sidebar-nav{
+    padding: 0px;
+    height: 100px;
+    width: 200px;
+    padding-top: 20px;
+}
+.sidebar a{
+    margin: 0px;
+    padding: 0px;
+    display:block;
+    height: 45px;
+    font-size: 24px;
+    text-align: center;
+    color: whitesmoke;
+    text-decoration: none;
+}
+.content{
+    margin:0px;
+    padding:0px;
+    width: 85%;
+    display: inline-block;
+}
+.sidebar a:active{
+    background-color: #95989A;
+}
+.sidebar a:hover{
+    background-color: #95989A;
+}
+.page{
+    background-color: #FFFFFF;
+    min-height: 800px;
+}
+.container{
+    width:100%;
+    margin:0px;
+    padding:0px;
+    
 }

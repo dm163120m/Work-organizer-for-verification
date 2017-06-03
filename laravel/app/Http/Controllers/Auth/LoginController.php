@@ -63,6 +63,8 @@ class LoginController extends Controller
             }
         }
 
-        return redirect('login')->with('msg', 'The username or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current username and password.');
+        return redirect('login')
+            ->with('msg', 'The username or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current username and password.')
+            ->withInput($request->only('username'));
     }
 }
