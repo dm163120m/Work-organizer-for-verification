@@ -206,3 +206,22 @@ a:visited {
     border-style:solid;
     padding:15px;
 }
+.positive{
+    color:lime;
+}
+.negative{
+    color:red;
+}
+.tabela{
+    color:#423F47;
+    border:1px solid #dddddd;
+}
+.tabela td{
+    text-align: center;
+    border:1px solid #dddddd;
+}
+.tabela th{
+    background-color: #423F47;
+    color:white;
+    text-align: center;
+}

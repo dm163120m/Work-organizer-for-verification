@@ -179,5 +179,5 @@
             var viewTask = document.getElementById("view_task");
             createNewTask.classList.add("hidden");
             viewTask.classList.remove("hidden");}
-    </script
+    </script>
 @endsection
