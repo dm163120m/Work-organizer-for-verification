@@ -6,7 +6,14 @@
     <link href="/css/global.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-@yield('header')
+
+<div class="header">
+    <div class="logo"><img src="/images/logo.png" /></div>
+    <div class="userMenu">
+        <h2 class="userName">{{$data['firstName']}} {{$data['secondName']}}</h2>
+        <img class="avatar" src="{{asset($data['avatar'])}}" />
+    </div>
+</div>
 
 <div class="container">
     <div class="sidebar col-md-12">

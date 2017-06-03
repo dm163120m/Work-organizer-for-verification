@@ -2,13 +2,16 @@
 
 @section('header')
     @parent
-    <div class="header">
-        <div class="logo"><img src="/images/logo.png" /></div>
-        <div class="userMenu">
-            <h2 class="userName">{{$firstName}} {{$secondName}}</h2>
-            <img class="avatar" src="{{asset($avatar)}}" />
-        </div>
-    </div>
+@endsection
+
+@section('list')
+<div>
+    <ul>
+        @foreach ($data['tasks'] as $task)
+            <li>{{ $task['title'] }}</li>
+        @endforeach
+    </ul>
+</div>
 @endsection
 
 @section('page')
