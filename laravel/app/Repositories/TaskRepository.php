@@ -22,4 +22,16 @@ class TaskRepository{
         return Task::where('id',$id)->first()->getAttributes();
     }
 
+    /**
+     * @return Task
+     */
+    public function create($request){
+        $newTask = $request->all();
+        unset($newTask['_token']);
+        $newTask['author'] = session('username');
+        $task = new Task($newTask);
+        $task->save();
+        return;
+    }
+
 }

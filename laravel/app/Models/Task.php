@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model{
     protected $table = 'tasks';
 
+    protected $fillable = ['title', 'description', 'author', 'assignee', 'priority', 'status'];
+
     public function priority(){
         return $this->hasOne('App\Priority', 'id');
     }
@@ -19,5 +21,5 @@ class Task extends Model{
     public function assignee(){
         return $this->hasOne('App\User', 'username' ,'assignee');
     }
-
+    public $timestamps = false;
 }
