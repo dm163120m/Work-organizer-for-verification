@@ -16,6 +16,10 @@ body{
     color: white;
     font-size: 20px;
 }
+.labela2 {
+    color: #9DA2AB;
+    font-size: 16px;
+}
 
 .polja{
     background-color: #B1B7BB;
@@ -33,6 +37,15 @@ body{
 
 .loginButton{
     padding: 10px 30px 10px 30px;
+    background-color: #423F47;
+    color: white;
+    margin-top: 5%;
+    font-size: 18px;
+}
+
+.saveChangesButton{
+    padding-left: 30px;
+    padding-right: 50px;
     background-color: #423F47;
     color: white;
     margin-top: 5%;
