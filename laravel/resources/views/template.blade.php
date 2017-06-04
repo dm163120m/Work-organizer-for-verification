@@ -41,11 +41,7 @@
 
 <div class="container">
     <div class="sidebar col-md-12">
-        <div class="sidebar-nav col-md-12">
-            <a href="#">Home</a>
-            <a href="tasks#">My Tasks</a>
-            <a href="tests#">Tests</a>
-        </div>
+        @yield('sidebar')
     </div>
     <div class="content">
         <div class="col-md-2" style="padding-right:0px; padding-top:44px;">

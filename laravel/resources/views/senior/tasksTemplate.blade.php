@@ -1,4 +1,4 @@
-@extends('template')
+@extends('page_template')
 
 @section('header')
     @parent
