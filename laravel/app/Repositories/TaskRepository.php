@@ -19,9 +19,13 @@ class TaskRepository{
     }
 
     public function find($id){
-        return Task::where('id',$id)->with('priority', 'status', 'author', 'assignee')->first()->getAttributes();
+        return Task::where('id',$id)->with('priority', 'status', 'author', 'assignee')->first();
     }
 
+    public function getTests($id){
+        return Task::where('id', '=', $id)->with('priority', 'status', 'author', 'assignee', 'tests')->first()->toArray();
+    }
+    
     /**
      * @return Task
      */
@@ -30,6 +34,22 @@ class TaskRepository{
         unset($newTask['_token']);
         $newTask['author'] = session('username');
         $task = new Task($newTask);
+        $task->save();
+        return;
+    }
+
+    /**
+     * @return Task
+     */
+    public function update($request){
+        $editedTask = $request->all();
+        $task = Task::find($editedTask["id"]);
+        $task->author = session('username');
+        $task->title = $editedTask["title"];
+        $task->description = $editedTask["description"];
+        $task->status = $editedTask["status"];
+        $task->priority = $editedTask["priority"];
+        $task->assignee = $editedTask["assignee"];
         $task->save();
         return;
     }

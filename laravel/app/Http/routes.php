@@ -30,3 +30,4 @@ Route::get('/senior/create_test', 'SeniorController@createTest');
 Route::get('/admin/requests', 'AdminController@requests');
 Route::get('/admin/users', 'AdminController@users');
 Route::get('/senior/editprofile', 'UserController@editProfile');
+Route::post('/senior/update_task', 'SeniorController@updateTask');

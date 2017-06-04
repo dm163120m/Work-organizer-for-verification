@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Test extends Model
 {
     protected $table = 'tests';
-
     protected $fillable = ['title', 'author', 'group', 'path', 'description'];
 
     public function group_id(){
@@ -17,5 +16,8 @@ class Test extends Model
         return $this->belongsTo('App\User', 'author', 'username');
     }
 
+    public function tasks(){
+        return $this->belongsToMany('App\Test', 'tasks_tests', 'test_id', 'test_id');
+    }
     public $timestamps = false;
 }

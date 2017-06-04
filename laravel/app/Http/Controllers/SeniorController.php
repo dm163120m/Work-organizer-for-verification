@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\Task\TaskRequest;
 use App\Http\Requests\Test\TestRequest;
+use App\Http\Requests\Task\TaskRequest;
 use App\Repositories\TaskRepository as TaskRepo;
 use App\Repositories\TestRepository as TestRepo;
 use App\Repositories\UserRepository as UserRepo;
 use App\Priority;
 use App\Status;
 use App\Group;
+use App\Task;
+use App\Tasks_Tests;
 
 class SeniorController extends Controller{
 
@@ -45,7 +47,7 @@ class SeniorController extends Controller{
         $data['statuses'] = Status::all()->toArray();
 
         $selected = 0;
-        if(count($data['tasks']) > 0) $selected = $data['tasks'][0];
+        if(count($data['tasks']) > 0) $selected = $this->taskRepo->getTests(1);
         return view('senior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
@@ -77,9 +79,11 @@ class SeniorController extends Controller{
         $data['priorities'] = Priority::all()->toArray();
         $data['statuses'] = Status::all()->toArray();
 
-        $selected = $this->taskRepo->find($id);
+        $selected = $this->taskRepo->getTests($id);
 
 //        dd($selected);
+//        $post = Task::find($id);
+//        $post->tests()->attach($image_ids);
         return view('senior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
@@ -91,6 +95,11 @@ class SeniorController extends Controller{
      */
     public function createTaskPost(TaskRequest $request){
         $this->taskRepo->create($request);
+        return redirect('/senior/tasks');
+    }
+
+    public function updateTask(TaskRequest $request){
+        $this->taskRepo->update($request);
         return redirect('/senior/tasks');
     }
 
@@ -112,5 +121,4 @@ class SeniorController extends Controller{
         $this->testRepo->create($request);
         return redirect('/senior/test');
     }
-
 }

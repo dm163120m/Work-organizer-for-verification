@@ -10,10 +10,10 @@ class Task extends Model{
     protected $fillable = ['title', 'description', 'author', 'assignee', 'priority', 'status'];
 
     public function priority(){
-        return $this->hasOne('App\Priority', 'id');
+        return $this->hasOne('App\Priority', 'id', 'priority');
     }
     public function status(){
-        return $this->hasOne('App\Status', 'id');
+        return $this->hasOne('App\Status', 'id', 'status');
     }
     public function author(){
         return $this->belongsTo('App\User', 'author', 'username');
@@ -21,5 +21,10 @@ class Task extends Model{
     public function assignee(){
         return $this->hasOne('App\User', 'username' ,'assignee');
     }
+
+    public function tests(){
+        return $this->belongsToMany('App\Test', 'tasks_tests', 'task_id', 'test_id');
+    }
+
     public $timestamps = false;
 }
