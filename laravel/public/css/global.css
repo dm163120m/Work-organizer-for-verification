@@ -225,3 +225,22 @@ a:visited {
     color:white;
     text-align: center;
 }
+.userOptions{
+    position: absolute;
+    background-color: #423F47;
+    min-height: 50px;
+    width: 150px;
+    text-align: center;
+    display: inline-block;
+    right: 55px;
+    top:130px;
+}
+.userOption{
+    color:white !important;
+    text-decoration: none;
+}
+.userOption:hover{
+    background-color: white;
+    color:#423F47 !important;
+    text-decoration: none;
+}

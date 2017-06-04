@@ -14,8 +14,29 @@
     <div class="logo"><img src="/images/logo.png" /></div>
     <div class="userMenu">
         <h2 class="userName">{{$data['firstName']}} {{$data['secondName']}}</h2>
-        <img class="avatar" src="{{asset($data['avatar'])}}" />
+        <img class="avatar" id="avatar" onClick="showUserOptions()" src="{{asset($data['avatar'])}}" />
     </div>
+    <div class="userOptions hidden" id="userOptions">
+        <a href="#" class="col-md-12 userOption">Edit Profile</a>
+        <a href="#" class="col-md-12 userOption">Log Out</a>
+    </div>
+    <script>
+        var showUserOptions = function()
+        {
+            var avatar = document.getElementById("avatar");
+            var menu = document.getElementById("userOptions");
+            if(menu.classList.contains("hidden"))
+            {
+                menu.classList.remove("hidden");
+                avatar.style.borderColor = "#FFFFFF";
+            }
+            else
+            {
+                menu.classList.add("hidden");
+                avatar.style.borderColor = "#423F47";
+            }
+        }
+    </script>
 </div>
 
 <div class="container">

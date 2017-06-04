@@ -19,7 +19,7 @@ class TaskRepository{
     }
 
     public function find($id){
-        return Task::where('id',$id)->first()->getAttributes();
+        return Task::where('id',$id)->with('priority', 'status', 'author', 'assignee')->first()->getAttributes();
     }
 
     /**

@@ -43,7 +43,9 @@ class SeniorController extends Controller{
         $data['priorities'] = Priority::all()->toArray();
         $data['statuses'] = Status::all()->toArray();
 
-        return view('senior/tasks')->with('data',$data);
+        $selected = 0;
+        if(count($data['tasks']) > 0) $selected = $data['tasks'][0];
+        return view('senior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
     public function tests(){
@@ -65,6 +67,19 @@ class SeniorController extends Controller{
         $data['priorities'] = Priority::all()->toArray();
         $data['statuses'] = Status::all()->toArray();
         return view('senior/createTask')->with('data',$data);
+    }
+
+    public function getTask($id){
+        $data = $this->getUserData();
+        $data['tasks'] = $this->taskRepo->getAll();
+        $data['juniors'] = $this->userRepo->getJuniors();
+        $data['priorities'] = Priority::all()->toArray();
+        $data['statuses'] = Status::all()->toArray();
+
+        $selected = $this->taskRepo->find($id);
+
+//        dd($selected);
+        return view('senior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
     /**
