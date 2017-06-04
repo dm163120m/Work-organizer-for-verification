@@ -17,7 +17,7 @@
         <img class="avatar" id="avatar" onClick="showUserOptions()" src="{{asset($data['avatar'])}}" />
     </div>
     <div class="userOptions hidden" id="userOptions">
-        <a href="#" class="col-md-12 userOption">Edit Profile</a>
+        <a href="/editprofile#" class="col-md-12 userOption">Edit Profile</a>
         <a href="#" class="col-md-12 userOption">Log Out</a>
     </div>
     <script>
