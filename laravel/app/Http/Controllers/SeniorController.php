@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\Task\TaskRequest;
+use App\Http\Requests\Test\TestRequest;
 use App\Repositories\TaskRepository as TaskRepo;
 use App\Repositories\TestRepository as TestRepo;
 use App\Repositories\UserRepository as UserRepo;
@@ -92,4 +93,24 @@ class SeniorController extends Controller{
         $this->taskRepo->create($request);
         return redirect('/senior/tasks');
     }
+
+    public function createTest(){
+        $data = $this->getUserData();
+        $data['tests'] = $this->testRepo->getAll();
+        $data['groups'] = Group::all()->toArray();
+        return view('senior/createTest')->with('data',$data);
+    }
+
+    /**
+     * Handle a create task request to the application
+     *
+     * @param  \App\Http\Requests\Test\TestRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createTestPost(TestRequest $request){
+        //dd($request);
+        $this->testRepo->create($request);
+        return redirect('/senior/test');
+    }
+
 }

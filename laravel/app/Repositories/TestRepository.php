@@ -17,4 +17,17 @@ class TestRepository{
     public function find($id){
         return Test::where('id',$id) -> first()->getAttributes();
     }
+
+    /**
+     * @return Test
+     */
+    public function create($request){
+        $newTest = $request->all();
+        unset($newTest['_token']);
+        $newTest['author'] = session('username');
+      //  dd($newTest);
+        $test = new Test($newTest);
+        $test->save();
+        return;
+    }
 }

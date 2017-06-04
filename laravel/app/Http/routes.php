@@ -25,3 +25,5 @@ Route::get('/senior/tasks/{id}', 'SeniorController@getTask');
 Route::get('/senior/tests', 'SeniorController@tests');
 Route::post('/senior/create_task_post', 'SeniorController@createTaskPost');
 Route::get('/senior/create_task', 'SeniorController@createTask');
+Route::post('/senior/create_test_post', 'SeniorController@createTestPost');
+Route::get('/senior/create_test', 'SeniorController@createTest');
