@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\UserRepository as UserRepo;
 
+
 class UserController extends Controller{
     private $userRepo;
 
@@ -27,4 +28,6 @@ class UserController extends Controller{
         $data = $this->getUserData();
         return view('user/editprofile')->with('data',$data);
     }
+
+    
 }

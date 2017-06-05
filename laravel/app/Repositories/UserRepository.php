@@ -21,4 +21,13 @@ class UserRepository {
         return User::where('role','junior')->get()->toArray();
     }
 
+    public function createUser($request){
+        $userForCreation = $request->all();
+        unset($userForCreation['_token']);
+        $userForCreation['approved'] = 0;
+        $user = new User($userForCreation);
+        $user->save();
+        return;
+    }
+
 }
