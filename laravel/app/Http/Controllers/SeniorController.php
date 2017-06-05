@@ -119,6 +119,6 @@ class SeniorController extends Controller{
     public function createTestPost(TestRequest $request){
         //dd($request);
         $this->testRepo->create($request);
-        return redirect('/senior/test');
+        return redirect('/senior/tests');
     }
 }
