@@ -29,5 +29,15 @@ class UserController extends Controller{
         return view('user/editprofile')->with('data',$data);
     }
 
+    public function notifications() {
+        $data = $this->getUserData();
+        $data["notifications"] = Notification::all();
+
+        //$data['firstName'] = $user['Name'];
+        //$data['secondName'] = $user['Surname'];
+        //dd($data);
+        return view('senior/home')->with('data',$data);
+    }
+
     
 }

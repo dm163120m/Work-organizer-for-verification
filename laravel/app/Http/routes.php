@@ -32,3 +32,5 @@ Route::get('/admin/users', 'AdminController@users');
 Route::get('/editprofile', 'UserController@editProfile');
 Route::post('/senior/update_task', 'SeniorController@updateTask');
 Route::post('/register', 'Auth\RegisterController@registerPost');
+Route::get('/senior/home', 'UserController@notifications');
+
