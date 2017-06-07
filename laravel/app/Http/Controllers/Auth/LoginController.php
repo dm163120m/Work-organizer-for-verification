@@ -57,8 +57,8 @@ class LoginController extends Controller
             $attributes = $user->getAttributes();
             if($attributes['password'] == $password){
                 $request->session()->put('username', $attributes['username']);
-                if($attributes['role'] == 'junior') return redirect('/junior');
-                else  if($attributes['role'] == 'senior') return redirect('/senior/tasks');
+                if($attributes['role'] == 'junior') return redirect('/junior/home');
+                else  if($attributes['role'] == 'senior') return redirect('/senior/home');
                 else return redirect('/admin');
             }
         }

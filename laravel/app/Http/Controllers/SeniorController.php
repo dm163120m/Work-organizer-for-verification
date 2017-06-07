@@ -9,6 +9,7 @@ use App\Repositories\UserRepository as UserRepo;
 use App\Priority;
 use App\Status;
 use App\Group;
+use App\Notification;
 use App\Task;
 use App\Tasks_Tests;
 
@@ -121,4 +122,16 @@ class SeniorController extends Controller{
         $this->testRepo->create($request);
         return redirect('/senior/tests');
     }
+
+    public function notifications() {
+        $data = $this->getUserData();
+        //dd($data);
+        $data["notifications"] = Notification::all();
+
+        //$data['firstName'] = $user['Name'];
+        //$data['secondName'] = $user['Surname'];
+        //dd($data);
+        return view('senior/home')->with('data',$data);
+    }
+
 }
