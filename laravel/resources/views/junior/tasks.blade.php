@@ -1,4 +1,4 @@
-@extends('senior/tasksTemplate')
+@extends('junior/tasksTemplate')
 
 @section('page')
     @if($errors->has())
@@ -6,46 +6,33 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="post" action="{{ url('senior/update_task') }}" >
+    <form method="post" action="{{ url('junior/update_task') }}" >
         {!! csrf_field() !!}
         <div id="view_task">
             <h2 class="page-title col-md-10">{{$selected['title']}}</h2>
             <input type="text" value="{{$selected['title']}}" name="title" hidden />
             <p class="indexer col-md-2">TSK#{{$selected['id']}}</p>
             <input type="text" value="{{$selected['id']}}" name="id" hidden />
-            <div class="group col-md-12">
-                <p class="col-md-2">Author:</p>
-                <p style="color: #95989A;" class="col-md-4">{{$data['firstName']}} {{$data['secondName']}}</p>
-                <p class=" col-md-2" type="label">Assigned To:</p>
-                <select class="formselect col-md-3" name="assignee">
-                    @foreach ($data['juniors'] as $junior)
-                        <option value={{$junior['username']}} {{ $selected['assignee']['username'] == $junior['username'] ? 'selected="selected"' : '' }}>
-                            {{$junior['Name']}} {{$junior['Surname']}}
-                        </option>
-                    @endforeach
-                </select>
+            <div class="group_1 col-md-12">
+                <div class="group_1 col-md-12">
+                    <p class="col-md-2">Author:</p>
+                    <p style="color: #95989A;" class="col-md-10">{{$selected['author']['Name']}} {{$selected['author']['Surname']}}</p>
+                </div>
+                <div class="group_1 col-md-12">
+                    <p class="col-md-3" type="label">Assigned To:</p>
+                    <p style="color: #95989A;" class="col-md-9">{{$selected['assignee']['Name']}} {{$selected['assignee']['Surname']}}</p>
+                </div>
             </div>
             <div class="group col-md-12">
                 <p class="col-md-12" type="label">Description:</p>
-                <textarea name="description" id="description" style="width:100%;max-width:100%;height:200px;">{{$selected['description']}}</textarea>
+                <div class="col-md-12" style="color: #95989A; border: 1px solid gray;width:100%;max-width:100%;height:100px;">{{$selected['description']}}</div>
             </div>
             <div class="group col-md-12">
                 <p class="col-md-2" type="label">Priority:</p>
-                <select class="formselect col-md-3" name="priority">
-                    @foreach ($data['priorities'] as $priority)
-                        <option value={{$priority['id']}}  {{ $selected['priority']['priority'] == $priority['priority'] ? 'selected="selected"' : '' }}>
-                            {{$priority['priority']}}
-                        </option>
-                    @endforeach
-                </select>
+                <p style="color: #95989A;" class="col-md-4">{{$selected['priority']['priority']}}</p>
                 <p class="col-md-2" type="label">Status:</p>
-                <select class="formselect col-md-3" name="status">
-                    @foreach ($data['statuses'] as $status)
-                        <option value={{$status['id']}} {{ $selected['status']['status'] == $status['status'] ? 'selected="selected"' : '' }}>
-                            {{$status['status']}}
-                        </option>
-                    @endforeach
-                </select>
+                <p style="color: #95989A;" class="col-md-4">{{$selected['status']['status']}}</p>
+
             </div>
             <div class="group col-md-12">
                 @foreach ($selected['tests'] as $test)
@@ -53,17 +40,17 @@
                 @endforeach
             </div>
             <div class="group col-md-12" style="margin-top:15px; margin-bottom:20px;">
-                <p class="" style="font-size:22px; margin-left:15px;"><i style="color: #95989A; font-size:30px" class="fa fa-plus-circle"></i> Add test</p>
+                <p style="font-size: 15px; margin-left:15px; padding-top: 3px"><i style="color: #95989A; font-size:20px" class="fa fa-plus-circle"></i> Add report</p>
             </div>
 
             <div class="group col-md-12">
-                <p class="col-md-3" type="label">Junior Comment:</p>
-                <p style="color: #95989A;" class="col-md-9">This regression needs to be run from work folder.</p>
+                <p class="col-md-6" type="label">Senior Comment:</p>
+                <p style="color: #95989A;" class="col-md-8"; >This regression needs to be run from work folder.</p>
             </div>
             <div class="group col-md-12">
                 <p class="col-md-12" type="label">Comment:</p>
                 <div class="col-md-12">
-                    <div id="comment2" style="height:150px;">
+                    <div id="comment2" style="height:100px;">
                         <p></p>
                     </div>
                 </div>
@@ -88,3 +75,4 @@
         });
     </script>
 @endsection
+

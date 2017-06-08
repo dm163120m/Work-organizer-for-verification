@@ -157,6 +157,11 @@ a:visited {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.group_1{
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
 .indexer{
     padding-top: 23px;
     text-align: center;
@@ -273,4 +278,10 @@ a:visited {
     height: 50px;
     width: 50px;
     display: inline-block;
+}
+.filterInput{
+    font-size:18px;
+    background-color: #bbbfc6;
+    border-width: 0px;
+    height: 40px;
 }
