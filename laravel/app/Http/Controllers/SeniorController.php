@@ -62,6 +62,9 @@ class SeniorController extends Controller{
         $selected = 0;
         if(count($data['tasks']) > 0) $selected = $this->taskRepo->getTests(1);
 //            dd($selected['tests']);
+
+//        $tests = $this->testRepo->getInArray(['1', '3']);
+//        dd($tests->toArray());
         return view('senior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
@@ -99,7 +102,7 @@ class SeniorController extends Controller{
     }
 
     public function updateTask(TaskRequest $request){
-//        dd($request);
+//        dd($request->all());
         $this->taskRepo->update($request);
         return redirect('/senior/tasks');
     }
@@ -129,19 +132,14 @@ class SeniorController extends Controller{
         $data["notifications"] = Notification::all();
     }
 
-    public function addTests($task_id){
-//        Tasks_Tests::where('task_id', $task_id)
-//            ->update(['test_id' => 1]);
+    public function getTests(Request $request){
+        $inputArray = $request->input('tests_array');
+        $tests = $this->testRepo->getInArray($inputArray)->toArray();
+        return response()->json(['returnedTests' => $tests]);
+//        return $request;
     }
 
-//    public function markTests(&$groupTests, $selectedTests){
-//        foreach ($groupTests as &$g){
-//            foreach ($g['tests'] as &$el){
-//                $el['inTask'] = 0;
-//                if(checkIfInArray($el , $selectedTests)) $el['inTask'] = 1;
-//            }
-//        }
-//    }
+
 
     public function searchTasks(Request $request){
         $data = $request->all();

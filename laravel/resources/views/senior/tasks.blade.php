@@ -6,7 +6,7 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="post" action="{{ url('senior/update_task') }}" >
+    <form method="post" action="{{ url('senior/update_task') }}" name="forma">
         {!! csrf_field() !!}
         <div id="view_task">
             <h2 class="page-title col-md-10">{{$selected['title']}}</h2>
@@ -50,6 +50,7 @@
             <div class="group col-md-12" id="tests">
                 @foreach ($selected['tests'] as $test)
                     <div class="col-md-3 test" id="{{$test['id']}}">{{$test['title']}}</div>
+                    <input id="{{$test['id']}}" type="checkbox" value="{{$test['id']}}" name="addedTests[]" onChange="" checked hidden>
                 @endforeach
             </div>
             <div class="group col-md-12" style="margin-top:15px; margin-bottom:20px;">
@@ -73,33 +74,34 @@
                 <input class="col-md-3 formbutton" style="margin-left:-30px;margin-bottom:30px;width:160px;" type = "submit" value="Save changes" />
             </div>
         </div>
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-inner">
+                    <h2>Add Tests to Task</h2>
+                    <ul class="modal-groups">
+                        @foreach ($data['groupsTests'] as $group)
+                            <h3>{{$group['name'] }}</h3>
+                            @foreach ($group['tests'] as $test)
+                                @if(!checkIfInArray($test, $selected['tests']))
+                                    <li>
+                                        <input id="{{$test['id']}}" type="checkbox" value="{{$test['id']}}" name="checkedTests[]" onChange="">{{$test['title'] }}
+                                    </li>
+                                @endif
+                            @endforeach
+                        @endforeach
+                    </ul>
+                    <input name="task_id" value="{{$selected['id']}}" hidden />
+                </div>
+                {!! csrf_field() !!}
+                <Button id="addTests" class="formbutton" style="width: 100px;">Add</Button>
+            </div>
+
+        </div>
     </form>
 
-    <div id="myModal" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-inner">
-                <h2>Add Tests to Task</h2>
-                <ul class="modal-groups">
-                @foreach ($data['groupsTests'] as $group)
-                    <h3>{{$group['name'] }}</h3>
-                    @foreach ($group['tests'] as $test)
-                        @if(!checkIfInArray($test, $selected['tests']))
-                        <li>
-                            <input id="{{$test['id']}}" type="checkbox" value="0" name="addedTests[]" onChange="">{{$test['title'] }}
-                        </li>
-                        @endif
-                    @endforeach
-                @endforeach
-                </ul>
-                <input name="task_id" value="{{$selected['id']}}" hidden />
-            </div>
-            <Button id="addTests" class="formbutton" style="width: 100px;">Add</Button>
-        </div>
-
-    </div>
     <script>
         var commentEditor2 = new Quill('#comment2', {
             modules: {
@@ -117,9 +119,10 @@
         var btn = document.getElementById("modal_add_tests");
         var span = document.getElementsByClassName("close")[0];
         var addBtton = document.getElementById("addTests");
-
+        var token = document.getElementById("addTests");
         addBtton.onclick = function () {
-            var checkedTests =  document.getElementsByName("addedTests[]");
+            event.preventDefault();
+            var checkedTests =  document.getElementsByName("checkedTests[]");
             var chklength = checkedTests.length;
             var checkedTestsArray=[];
             for(k=0;k< chklength;k++){
@@ -127,20 +130,35 @@
                     checkedTestsArray.push(checkedTests[k].id);
                 }
             }
-            console.log(checkedTestsArray);
-//            var http = new XMLHttpRequest();
-//            var url = "/add_tests";
-//            var params = "lorem=ipsum&name=binny";
-//            http.open("POST", url, true);
-//
-//            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//
-//            http.onreadystatechange = function() {//Call a function when the state changes.
-//                if(http.readyState == 4 && http.status == 200) {
-//                    alert(http.responseText);
-//                }
-//            }
-//            http.send(params);
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8000/get_tests/',
+                dataType: "json",
+                data: { 'tests_array' : checkedTestsArray},
+                success: function(response) {
+                    console.log(response.returnedTests);
+                    var testsDiv = document.getElementById("tests");
+                    var checked = response.returnedTests;
+                    for(k=0; k<checked.length ;k++){
+                        var el = document.createElement("div");
+                        el.className = "col-md-3 test";
+                        el.id = checked[k]['id'];
+                        el.innerHTML=checked[k]['title'];
+                        el.type="checkbox";
+                        el.value=checked[k]['id'];
+                        el.name = "addedTests[]";
+                        var hiddenIn = document.createElement("input");
+                        hiddenIn.id = checked[k]['id'];
+                        hiddenIn.checked =true;
+                        hiddenIn.style.visibility = "hidden";
+                        testsDiv.appendChild(el);
+                        testsDiv.appendChild(hiddenIn);
+                    }
+                },error:function(){
+                    console.log('greska');
+                }
+            });
             modal.style.display = "none";
         }
 
