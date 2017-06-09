@@ -85,12 +85,12 @@
                 <span class="close">&times;</span>
                 <div class="modal-inner">
                     <h2>Add Tests to Task</h2>
-                    <ul class="modal-groups">
+                    <ul class="modal-groups" id="modal-groups">
                         @foreach ($data['groupsTests'] as $group)
                             <h3>{{$group['name'] }}</h3>
                             @foreach ($group['tests'] as $test)
                                 @if(!checkIfInArray($test, $selected['tests']))
-                                    <li>
+                                    <li id="test_li{{$test['id']}}">
                                         <input id="{{$test['id']}}" type="checkbox" value="{{$test['id']}}" name="checkedTests[]" onChange="">{{$test['title'] }}
                                     </li>
                                 @endif
@@ -144,6 +144,7 @@
                     console.log(response.returnedTests);
                     var testsDiv = document.getElementById("tests");
                     var checked = response.returnedTests;
+					var modalgroups = document.getElementById("modal-groups");
                     for(k=0; k<checked.length ;k++){
                         var pel = document.createElement("div");
                         pel.className = "col-md-4";
@@ -161,6 +162,8 @@
                         pel.appendChild(el);
                         pel.appendChild(hiddenIn);
                         testsDiv.appendChild(pel);
+						var c_test = document.getElementById('test_li'+checked[k]['id']);
+                        modalgroups.removeChild(c_test);
                     }
                 },error:function(){
                     console.log('greska');
