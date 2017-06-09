@@ -142,10 +142,11 @@ class SeniorController extends Controller{
 
 
     public function searchTasks(Request $request){
-        $data = $request->all();
-//        dd($data);
-        $results = $this->taskRepo->search($data);
-        dd($results);
+        $data = $this->getUserData();
+        $data = $this->getTasksData($data);
+        $r = $request->all();
+        $results = $this->taskRepo->search($r);
+        return view('senior/searchTasks')->with('results',$results)->with('data',$data);
     }
 
 

@@ -1,4 +1,36 @@
-@extends('senior/tasksTemplate')
+@extends('page_template')
+
+@section('header')
+    @parent
+@endsection
+
+@section('list')
+    <div class="sidebar-tsk col-md-12" style="padding:0px; margin:0px;">
+        <div class="lista col-md-12" style="padding:0px; margin:0px;">
+            <ul class="tasks_ul">
+                @foreach ($data['groupsTests'] as $group)
+                    <li class="task_li col-md-12" style="padding:10px 0px 00px 0px;background-color:#423F47;color:white;">
+                        <p class="col-md-12" style="font-size:18px">{{$group['name'] }}</p>
+                    </li>
+                    @foreach ($group['tests'] as $test)
+                        <li class="task_li col-md-12" style="padding:10px 0px 00px 0px;">
+                            <a href="#" onClick="showViewTest()">
+                                <p class="col-md-12" style="font-size:18px"><b>{{$test['title'] }}</b></p>
+                                <p class="col-md-12" style="font-size:18px">{{$test['author'] }}</p>
+                            </a>
+                        </li>
+                    @endforeach
+                @endforeach
+            </ul>
+        </div>
+    </div>
+@endsection
+
+@section('pageheader')
+    <div>
+        <p class="" onClick="showCreateNewTest()" style="font-size:22px; margin-left:15px; cursor:pointer;"><i style="font-size:30px" class="fa fa-plus-circle"></i> Create new test</p>
+    </div>
+@endsection
 
 @section('page')
     @if($errors->has())
@@ -6,104 +38,68 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="post" action="{{ url('senior/update_task') }}" name="forma">
+    <form method="post" action="{{ url('/senior/create_test_post') }}" >
         {!! csrf_field() !!}
-        <div id="view_task">
-            <h2 class="page-title col-md-10">{{$selected['title']}}</h2>
-            <input type="text" value="{{$selected['title']}}" name="title" hidden />
-            <p class="indexer col-md-2">TSK#{{$selected['id']}}</p>
-            <input type="text" value="{{$selected['id']}}" name="id" hidden />
+        <div class="hidden" id="create_new_test">
+            <h2 class="page-title col-md-11">Create new test</h2>
+            <p class="indexer col-md-1">TSK#5</p>
+            <div style="margin-top:15px;" class="group col-md-12">
+                <p class="col-md-2" style="font-size:28px;" type="label">Title:<b style="color:red;">*</b></p>
+                <input style="font-size:28px; margin-top:-5px;" class="col-md-10" type="text" name="title" />
+            </div>
             <div class="group col-md-12">
                 <p class="col-md-2">Author:</p>
                 <p style="color: #95989A;" class="col-md-4">{{$data['firstName']}} {{$data['secondName']}}</p>
-                <p class=" col-md-2" type="label">Assigned To:</p>
-                <select class="formselect col-md-3" name="assignee">
-                    @foreach ($data['juniors'] as $junior)
-                        <option value={{$junior['username']}} {{ $selected['assignee']['username'] == $junior['username'] ? 'selected="selected"' : '' }}>
-                            {{$junior['Name']}} {{$junior['Surname']}}
-                        </option>
+                <p class=" col-md-2" type="label">Group:<b style="color:red;">*</b></p>
+                <select class="formselect col-md-4" placeholder="Select Group" name="group_id">
+                    <option value="" disabled selected>Choose a Group </option>
+                    @foreach ($data['groups'] as $group)
+                        <option value={{$group['id']}} >{{$group['name']}} </option>
                     @endforeach
-                </select>
-            </div>
-            <div class="group col-md-12">
-                <p class="col-md-12" type="label">Description:</p>
-                <textarea name="description" id="description" style="width:100%;max-width:100%;height:200px;">{{$selected['description']}}</textarea>
-            </div>
-            <div class="group col-md-12">
-                <p class="col-md-2" type="label">Priority:</p>
-                <select class="formselect col-md-3" name="priority">
-                    @foreach ($data['priorities'] as $priority)
-                        <option value={{$priority['id']}}  {{ $selected['priority']['priority'] == $priority['priority'] ? 'selected="selected"' : '' }}>
-                            {{$priority['priority']}}
-                        </option>
-                    @endforeach
-                </select>
-                <p class="col-md-2" type="label">Status:</p>
-                <select class="formselect col-md-3" name="status">
-                    @foreach ($data['statuses'] as $status)
-                        <option value={{$status['id']}} {{ $selected['status']['status'] == $status['status'] ? 'selected="selected"' : '' }}>
-                            {{$status['status']}}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="group col-md-12" id="tests">
-                @foreach ($selected['tests'] as $test)
-                    <div class="col-md-3 test" id="{{$test['id']}}">{{$test['title']}}</div>
-                    <input id="{{$test['id']}}" type="checkbox" value="{{$test['id']}}" name="addedTests[]" onChange="" checked hidden>
-                @endforeach
-            </div>
-            <div class="group col-md-12" style="margin-top:15px; margin-bottom:20px;">
-                <button id="modal_add_tests"><p class="" style="font-size:22px; margin-left:15px;"><i style="color: #95989A; font-size:30px" class="fa fa-plus-circle"></i> Add test</p></button>
-            </div>
 
-            <div class="group col-md-12">
-                <p class="col-md-3" type="label">Senior Comment:</p>
-                <p style="color: #95989A;" class="col-md-9">This regression needs to be run from work folder.</p>
+                </select>
+            </div>
+            <div style="margin-top:15px;" class="group col-md-12">
+                <p class="col-md-2" style="font-size:16px;" type="label">Path:<b style="color:red;">*</b></p>
+                <input style="font-size:20px; margin-top:-5px;" class="col-md-10" type="text" name="path" />
             </div>
             <div class="group col-md-12">
-                <p class="col-md-12" type="label">Comment:</p>
+                <p class="col-md-12" type="label">Description: <b style="color:red;">*</b></p>
                 <div class="col-md-12">
-                    <div id="comment2" style="height:150px;">
-                        <p></p>
-                    </div>
+                    <textarea name="description" id="description" style="width:100%;max-width:100%;height:200px;"></textarea>
                 </div>
             </div>
             <div class="group col-md-12">
-                <div class="col-md-9"></div>
-                <input class="col-md-3 formbutton" style="margin-left:-30px;margin-bottom:30px;width:160px;" type = "submit" value="Save changes" />
+                <div class="col-md-10"></div>
+                <input class="col-md-2 formbutton" style="margin-left:-30px;margin-bottom:30px;width:160px;" type = "submit" value="Create" />
             </div>
-        </div>
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="modal-inner">
-                    <h2>Add Tests to Task</h2>
-                    <ul class="modal-groups">
-                        @foreach ($data['groupsTests'] as $group)
-                            <h3>{{$group['name'] }}</h3>
-                            @foreach ($group['tests'] as $test)
-                                @if(!checkIfInArray($test, $selected['tests']))
-                                    <li>
-                                        <input id="{{$test['id']}}" type="checkbox" value="{{$test['id']}}" name="checkedTests[]" onChange="">{{$test['title'] }}
-                                    </li>
-                                @endif
-                            @endforeach
-                        @endforeach
-                    </ul>
-                    <input name="task_id" value="{{$selected['id']}}" hidden />
-                </div>
-                {!! csrf_field() !!}
-                <Button id="addTests" class="formbutton" style="width: 100px;">Add</Button>
-            </div>
-
         </div>
     </form>
-
+    <div id="view_test">
+        <h2 class="page-title col-md-12">All tests</h2>
+        <table style="" class="col-md-12 tabela">
+            <tr>
+                <th />
+                <th> Author </th>
+                <th> Status </th>
+                <th> Path </th>
+                <th> Group </th>
+                <th> Comment </th>
+            </tr>
+            @foreach ($data['tests'] as $test)
+                <tr>
+                    <td><b>{{$test['title']}}</b></td>
+                    <td> {{$test['author']['Name']}} {{$test['author']['Surname']}} </td>
+                    <td class="positive"> </td>
+                    <td> {{$test['path']}} </td>
+                    <td> {{$test['group_id']['name']}} </td>
+                    <td> {{$test['description']}} </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
     <script>
-        var commentEditor2 = new Quill('#comment2', {
+        var descriptionEditor = new Quill('#description', {
             modules: {
                 toolbar: [
                     [{ header: [1, 2, false] }],
@@ -114,68 +110,15 @@
             placeholder: 'Compose an epic...',
             theme: 'snow'  // or 'bubble'
         });
-
-        var modal = document.getElementById('myModal');
-        var btn = document.getElementById("modal_add_tests");
-        var span = document.getElementsByClassName("close")[0];
-        var addBtton = document.getElementById("addTests");
-        var token = document.getElementById("addTests");
-        addBtton.onclick = function () {
-            event.preventDefault();
-            var checkedTests =  document.getElementsByName("checkedTests[]");
-            var chklength = checkedTests.length;
-            var checkedTestsArray=[];
-            for(k=0;k< chklength;k++){
-                if(checkedTests[k].checked == true){
-                    checkedTestsArray.push(checkedTests[k].id);
-                }
-            }
-
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:8000/get_tests/',
-                dataType: "json",
-                data: { 'tests_array' : checkedTestsArray},
-                success: function(response) {
-                    console.log(response.returnedTests);
-                    var testsDiv = document.getElementById("tests");
-                    var checked = response.returnedTests;
-                    for(k=0; k<checked.length ;k++){
-                        var el = document.createElement("div");
-                        el.className = "col-md-3 test";
-                        el.id = checked[k]['id'];
-                        el.innerHTML=checked[k]['title'];
-                        el.type="checkbox";
-                        el.value=checked[k]['id'];
-                        el.name = "addedTests[]";
-                        var hiddenIn = document.createElement("input");
-                        hiddenIn.id = checked[k]['id'];
-                        hiddenIn.checked =true;
-                        hiddenIn.style.visibility = "hidden";
-                        testsDiv.appendChild(el);
-                        testsDiv.appendChild(hiddenIn);
-                    }
-                },error:function(){
-                    console.log('greska');
-                }
-            });
-            modal.style.display = "none";
-        }
-
-        btn.onclick = function(event) {
-            event.preventDefault();
-            modal.style.display = "block";
-        }
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                event.preventDefault();
-                modal.style.display = "none";
-            }
-        }
+        var showCreateNewTest = function(){
+            var createNewTest = document.getElementById("create_new_test");
+            var viewTest = document.getElementById("view_test");
+            createNewTest.classList.remove("hidden");
+            viewTest.classList.add("hidden");}
+        var showViewTest = function(){
+            var createNewTest = document.getElementById("create_new_test");
+            var viewTest = document.getElementById("view_test");
+            createNewTest.classList.add("hidden");
+            viewTest.classList.remove("hidden");}
     </script>
 @endsection

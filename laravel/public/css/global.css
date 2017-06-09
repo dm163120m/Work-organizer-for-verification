@@ -340,3 +340,10 @@ button#modal_add_tests {
 .test{
     border: 1px solid grey;
 }
+.searchResultItem{
+    border: 1px solid #bbbfc6;
+    padding: 10px;
+    margin: 20px;
+    height: 50px;
+    padding-right: 0px;
+}

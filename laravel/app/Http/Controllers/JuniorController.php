@@ -98,7 +98,8 @@ class JuniorController extends Controller{
         $data['groups'] = Group::all()->toArray();
         $data['groupsTests'] = Group::with('tests')->get()->toArray();
         $data['tests'] = $this->testRepo->getAll();
-        return view('junior/tests')->with('data',$data);
+        //dd($data);
+        return view('senior/tests')->with('data',$data);
     }
 
     public function createTest(){
