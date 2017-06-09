@@ -25,7 +25,16 @@ class TaskRepository{
     public function getTests($id){
         return Task::where('id', '=', $id)->with('priority', 'status', 'author', 'assignee', 'tests')->first()->toArray();
     }
-    
+
+    public function search($data){
+        $conditions = [];
+        if($data['task_id'] != null AND $data['task_id'] != "") $conditions[] = ['id', '=', $data['task_id']];
+        if($data['title'] != null AND $data['title'] != "") $conditions[] = ['title' , 'LIKE', '%'.$data['title'].'%'];
+        if($data['assignee'] != null AND $data['assignee'] != "") $conditions[] = ['assignee' , '=', $data['assignee']];
+        if($data['author'] != null AND $data['author'] != "") $conditions[] = ['author' , '=', $data['author']];
+        return Task::where($conditions)->get()->toArray();
+    }
+
     /**
      * @return Task
      */

@@ -37,5 +37,6 @@ Route::get('/senior/home', 'SeniorController@notifications');
 Route::get('/junior/home', 'JuniorController@notifications');
 Route::get('/junior/tasks', 'JuniorController@tasks');
 Route::get('/junior/tests', 'JuniorController@tests');
-
+Route::get('/add_tests', 'SeniorController@addTest');
+Route::get('/senior/search_tasks', 'SeniorController@searchTasks');
 

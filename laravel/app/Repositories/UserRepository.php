@@ -21,6 +21,10 @@ class UserRepository {
         return User::where('role','junior')->get()->toArray();
     }
 
+    public function getSeniors(){
+        return User::where('role','senior')->get()->toArray();
+    }
+
     public function createUser($request){
         $userForCreation = $request->all();
         unset($userForCreation['_token']);

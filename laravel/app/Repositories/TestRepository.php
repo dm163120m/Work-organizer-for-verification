@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories;
+use App\Group;
 use App\Test;
 
 class TestRepository{
@@ -18,6 +19,10 @@ class TestRepository{
         return Test::where('id',$id) -> first()->getAttributes();
     }
 
+    public function getInArray($array){
+        return Test::whereIn('id', $array)->get();
+    }
+
     /**
      * @return Test
      */
@@ -25,7 +30,6 @@ class TestRepository{
         $newTest = $request->all();
         unset($newTest['_token']);
         $newTest['author'] = session('username');
-      //  dd($newTest);
         $test = new Test($newTest);
         $test->save();
         return;

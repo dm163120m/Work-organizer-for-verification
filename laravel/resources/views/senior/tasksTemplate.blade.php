@@ -30,16 +30,16 @@
 @section('filter')
     <div class="col-md-1"></div>
     <div class="col-md-10">
-        <form method="post" action="{{ url('/senior/search_tasks') }}" >
+        <form method="get" action="{{ url('/senior/search_tasks') }}" >
             <h3 style="margin-left:30px; margin-top:80px; font-size:20px;">Search Filters</h3>
             <div style="margin-top:15px;" class="group col-md-12">
-                <input class="col-md-12 filterInput" type="text" id="title" name="task_id" placeholder="Task ID" />
+                <input class="col-md-12 filterInput" type="text" id="task_id" name="task_id" placeholder="Task ID" />
             </div>
             <div class="group col-md-12">
                 <input class="col-md-12 filterInput" type="text" id="title" name="title" placeholder="Title" />
             </div>
             <div class="group col-md-12">
-                <select class="formselect col-md-12 filterInput" name="junior">
+                <select class="formselect col-md-12 filterInput" name="assignee">
                     <option value="" disabled selected>Select Junior</option>
                     @foreach ($data['juniors'] as $junior)
                         <option value={{$junior['username']}} >{{$junior['Name']}} {{$junior['Surname']}}</option>
@@ -49,8 +49,8 @@
             <div class="group col-md-12">
                 <select class="formselect col-md-12 filterInput" name="author">
                     <option value="" disabled selected>Select Author</option>
-                    @foreach ($data['juniors'] as $junior)
-                        <option value={{$junior['username']}} >{{$junior['Name']}} {{$junior['Surname']}}</option>
+                    @foreach ($data['seniors'] as $senior)
+                        <option value={{$senior['username']}} >{{$senior['Name']}} {{$senior['Surname']}}</option>
                     @endforeach
                 </select>
             </div>
