@@ -62,11 +62,15 @@
             </div>
 
             <div class="group col-md-12">
-                <p class="col-md-3" type="label">Senior Comment:</p>
-                <p style="color: #95989A;" class="col-md-9">This regression needs to be run from work folder.</p>
+                @if(count($selected['comments']) > 0)
+                    <p>Comments: </p>
+                @endif
+                @foreach($selected['comments'] as $comment)
+                    <p>{{$comment['username']}}: {{$comment['comment']}}</p>
+                @endforeach
             </div>
             <div class="group col-md-12">
-                <p class="col-md-12" type="label">Comment:</p>
+                <p class="col-md-12" type="label">Add Comment:</p>
                 <div class="col-md-12">
                     <div id="comment2" style="height:150px;">
                         <p></p>
@@ -79,30 +83,33 @@
             </div>
         </div>
         <div id="myModal" class="modal">
-
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="modal-inner">
                     <h2>Add Tests to Task</h2>
-                    <ul class="modal-groups" id="modal-groups">
-                        @foreach ($data['groupsTests'] as $group)
-                            <h3>{{$group['name'] }}</h3>
-                            @foreach ($group['tests'] as $test)
-                                @if(!checkIfInArray($test, $selected['tests']))
-                                    <li id="test_li{{$test['id']}}">
-                                        <input id="{{$test['id']}}" type="checkbox" value="{{$test['id']}}" name="checkedTests[]" onChange="">{{$test['title'] }}
-                                    </li>
-                                @endif
-                            @endforeach
+                    @foreach ($data['groupsTests'] as $group)
+                        <div>
+                            <p style="font-size:18px;">{{$group['name']}}</p>
+                        </div>
+                        @foreach ($group['tests'] as $test)
+                            <div class="group col-md-12" style="margin:0px; padding:0px">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-9" style="margin:0px; padding:0px">
+                                    <input class="col-md-1" style="color:#888a85; border-color:black;" type = "checkbox" onChange="" value="{{$test['id']}}" name="status[]" />
+                                    <p class="col-md-11" style="font-size:16px;"> {{$test['title']}}</p>
+                                </div>
+                            </div>
                         @endforeach
-                    </ul>
+                    @endforeach
                     <input name="task_id" value="{{$selected['id']}}" hidden />
+                    <div style="height:100px;">
+                        <div class="col-md-6"></div>
+                        <Button id="addTests" class="formbutton col-md-6" style="height: 45px; margin-top:15px;">Add</Button>
+                    </div>
                 </div>
                 {!! csrf_field() !!}
-                <Button id="addTests" class="formbutton" style="width: 100px;">Add</Button>
             </div>
-
         </div>
     </form>
 

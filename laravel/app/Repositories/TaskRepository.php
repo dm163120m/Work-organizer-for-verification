@@ -24,7 +24,7 @@ class TaskRepository{
     }
 
     public function getTests($id){
-        return Task::where('id', '=', $id)->with('priority', 'status', 'author', 'assignee', 'tests')->first()->toArray();
+        return Task::where('id', '=', $id)->with('priority', 'status', 'author', 'assignee', 'tests', 'comments')->first()->toArray();
     }
 
     public function search($data){

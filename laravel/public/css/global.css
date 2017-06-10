@@ -327,6 +327,10 @@ a:visited {
     width: 40%;
     margin: 0 auto;
 }
+.modal-inner2{
+    width: 80%;
+    margin: 0 auto;
+}
 
 /* The Close Button */
 .close {
@@ -344,6 +348,10 @@ a:visited {
 }
 
 button#modal_add_tests {
+    border: none;
+    background-color: transparent;
+}
+button#modal_add_reports {
     border: none;
     background-color: transparent;
 }
@@ -368,6 +376,17 @@ button#modal_add_tests {
     padding-right: 0px;
 }
 .report{
+    border: 1px solid #bbbfc6;
+    padding: 10px;
+    margin-top: 15px;
+    padding-right: 0px;
+}
+.groupedTests{
+    border: 1px solid #888a85;
+    padding: 10px;
+    margin-top: 15px;
+    padding-right: 0px;
+}.report{
     border: 1px solid #bbbfc6;
     padding: 10px;
     margin-top: 15px;

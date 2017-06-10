@@ -26,5 +26,9 @@ class Task extends Model{
         return $this->belongsToMany('App\Test', 'tasks_tests', 'task_id', 'test_id');
     }
 
+    public function comments(){
+        return $this->hasMany('App\Comment', 'task_id', 'id');
+    }
+
     public $timestamps = false;
 }

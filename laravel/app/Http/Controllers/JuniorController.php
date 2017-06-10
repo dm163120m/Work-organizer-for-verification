@@ -63,6 +63,7 @@ class JuniorController extends Controller{
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         $selected = 0;
+        //dd($data);
         if(count($data['tasks']) > 0) $selected = $this->taskRepo->getTests(1);
         return view('junior/tasks')->with('data',$data)->with('selected', $selected);
     }

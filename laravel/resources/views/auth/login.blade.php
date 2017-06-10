@@ -18,7 +18,7 @@
 			<form class="center loginForm" method="post" action="{{ url('/login') }}" >
 				{!! csrf_field() !!}
 				<label class="labela" for="username">Username</label>
-				<input class="polja" id="username" name="username" value={{ old('username') == "/" ? "" : old('username') }} /><br/>
+				<input class="polja" id="username" name="username" value={{ old('username') == "/" ? "" : old('username') }} ><br/>
 				<label class="labela" for="password">Password</label>
 				<input class="polja" id="password" name="password" value="" type="password"/><br/>
 				<button class="loginButton" type="submit">Log in</button><br/>
