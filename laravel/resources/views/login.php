@@ -11,9 +11,9 @@
                 <div class="login_wrapper">
                     <form class="loginForm">
                         <label class="labela" for="username">Username</label>
-                        <input class="polja" id="username" name="username" value="" /><br/>
+                        <input class="polja" id="username" name="username" value=""><br/>
                         <label class="labela" for="password">Password</label>
-                        <input class="polja" id="password" name="password" value="" type="password"/><br/>
+                        <input class="polja" id="password" name="password" value="" type="password"><br/>
                         <button class="loginButton">Log in</button>
                     </form>
                 </div>
