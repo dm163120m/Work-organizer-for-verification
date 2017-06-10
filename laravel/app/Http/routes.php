@@ -37,6 +37,7 @@ Route::post('/register', 'Auth\RegisterController@registerPost');
 Route::get('/senior/home', 'SeniorController@notifications');
 Route::post('/get_tests', 'SeniorController@getTests');
 Route::get('/senior/search_tasks', 'SeniorController@searchTasks');
+Route::get('/senior/search_tests', 'SeniorController@searchTests');
 Route::get('/junior/home', 'JuniorController@notifications');
 Route::get('/junior/tasks', 'JuniorController@tasks');
 Route::get('/junior/tasks/{id}', 'JuniorController@getTask');

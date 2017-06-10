@@ -38,4 +38,17 @@ class TestRepository{
         $test->save();
         return;
     }
+
+    public function search($data){
+        $conditions = [];
+        if($data['test_id'] != null AND $data['test_id'] != "") $conditions[] = ['id', '=', $data['test_id']];
+        if($data['title'] != null AND $data['title'] != "") $conditions[] = ['title' , 'LIKE', '%'.$data['title'].'%'];
+        if(array_key_exists ('author', $data) AND $data['author'] != "") $conditions[] = ['author' , '=', $data['author']];
+        if(array_key_exists ('group', $data) AND $data['group'] != "") $conditions[] = ['group' , '=', $data['group']];
+        if($data['path'] != null AND $data['path'] != "") $conditions[] = ['path' , 'LIKE', '%'.$data['path'].'%'];
+        if(array_key_exists ('statuses', $data) AND $data['statuses'] != "") $conditions[] = ['statuses' , '=', $data['statuses']];
+        $query = Test::where($conditions);
+        //dd($conditions);
+        return $query->get()->toArray();
+    }
 }
