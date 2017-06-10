@@ -33,10 +33,14 @@ class TaskRepository{
         if($data['title'] != null AND $data['title'] != "") $conditions[] = ['title' , 'LIKE', '%'.$data['title'].'%'];
         if(array_key_exists ('assignee', $data)  AND $data['assignee'] != "") $conditions[] = ['assignee' , '=', $data['assignee']];
         if(array_key_exists ('author', $data) AND $data['author'] != "") $conditions[] = ['author' , '=', $data['author']];
-        if(array_key_exists ('priority', $data)) $conditions[] = ['priority' , '=', $data['priority'][0]];
-        if(array_key_exists ('status', $data)) $conditions[] = ['status' , '=', $data['status'][0]];
-//        dd($conditions);
-        return Task::where($conditions)->get()->toArray();
+        $query = Task::where($conditions);
+        if(array_key_exists ('priority', $data)){
+            $query->whereIn('priority', $data['priority']);
+        }
+        if(array_key_exists ('status', $data)){
+            $query->whereIn('status', $data['status']);
+        }
+        return $query->get()->toArray();
     }
 
     /**
