@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UserRepository as UserRepo;
+use App\Http\Requests\Auth\EditProfileRequest;
 use Session;
 
 class UserController extends Controller{
@@ -26,6 +27,12 @@ class UserController extends Controller{
     public function logOut(){
         Session::flush();
         return redirect('login');
+    }
+
+    public function editProfilePost(EditProfileRequest $request){
+        $this->userRepo->editUser($request);
+        return view('user/editprofile')
+            ->with('msg', 'You successfully edited your profile!!');
     }
 
     

@@ -15,23 +15,33 @@ body{
 .labela {
     color: white;
     font-size: 20px;
+    font-weight: 100;
 }
 .labela2 {
     color: #9DA2AB;
     font-size: 16px;
+    font-weight: 100;
 }
 
 .polja{
     background-color: #B1B7BB;
     font-size: 16px;
     width: 100%;
-    margin-bottom: 7%;
+    margin-bottom: 10%;
     box-shadow: 0px 5px 5px 1px #83878e;
-    padding: 5px;
+    padding: 7px;
+}
+
+.polja2{
+    background-color: #B1B7BB;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10%;
+    padding: 7px;
 }
 
 .loginForm{
-    width: 30% !important;
+    width: 35% !important;
     padding-top: 10%;
 }
 
@@ -39,17 +49,22 @@ body{
     padding: 10px 30px 10px 30px;
     background-color: #423F47;
     color: white;
-    margin-top: 5%;
+    margin-top: 10%;
     font-size: 18px;
 }
 
 .saveChangesButton{
-    padding-left: 30px;
-    padding-right: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: #423F47;
     color: white;
-    margin-top: 5%;
+    margin-top: 7%;
+    /* margin-left: 20; */
+    float: right;
     font-size: 18px;
+    /* align-self: flex-end; */
 }
 
 .login_wrapper{
@@ -338,7 +353,12 @@ button#modal_add_tests {
 }
 
 .test{
-    border: 1px solid grey;
+    margin-top: 5px;
+    border: 1px solid #bbbfc6;
+    border-radius: 5px;
+    background-color: white;
+    color: #888a85;
+    text-align: center;
 }
 .searchResultItem{
     border: 1px solid #bbbfc6;

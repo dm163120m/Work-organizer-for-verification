@@ -18,6 +18,7 @@ class UserRepository {
             $data['secondName'] = $user['Surname'];
             $data['avatar'] = $user['imageUrl'];
             $data['role'] = $user['role'];
+            $data['email'] = $user['email'];
             return $data;
         }
     }
