@@ -1,4 +1,4 @@
-@extends('senior/tasksTemplate')
+@extends('tasksTemplate')
 
 @section('page')
     @if($errors->has())
@@ -15,7 +15,7 @@
             <input type="text" value="{{$selected['id']}}" name="id" hidden />
             <div class="group col-md-12">
                 <p class="col-md-2">Author:</p>
-                <p style="color: #95989A;" class="col-md-4">{{$data['firstName']}} {{$data['secondName']}}</p>
+                <p style="color: #95989A;" class="col-md-4">{{$selected['author']['Name']}} {{$selected['author']['Surname']}}</p>
                 <p class=" col-md-2" type="label">Assigned To:</p>
                 <select class="formselect col-md-3" name="assignee">
                     @foreach ($data['juniors'] as $junior)

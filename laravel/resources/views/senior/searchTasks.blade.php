@@ -1,4 +1,4 @@
-@extends('senior/tasksTemplate')
+@extends('tasksTemplate')
 
 @section('page')
     <h2> Search Results </h2>

@@ -23,6 +23,10 @@ class TestRepository{
         return Test::whereIn('id', $array)->get();
     }
 
+    public function getById($id){
+        return Test::where('id', '=', $id)->with('reports', 'author')->first()->toArray();
+    }
+
     /**
      * @return Test
      */

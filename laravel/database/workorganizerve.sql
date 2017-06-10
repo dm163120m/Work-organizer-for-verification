@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2017 at 09:11 PM
+-- Generation Time: Jun 10, 2017 at 03:23 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -128,7 +128,19 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `seed` bigint(20) DEFAULT NULL,
   `fail_description` text COLLATE utf8_bin,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `latest_change`, `latest_run`, `count`, `status`, `seed`, `fail_description`) VALUES
+(1, '2017-04-18', '2017-05-16', 2, 1, NULL, NULL),
+(2, '2017-06-20', '2017-05-22', 2, 0, 123124654981516, 'Something went wrong'),
+(3, '2017-04-03', '2017-06-01', 3, 1, 0, NULL),
+(4, '2017-05-15', '2017-06-02', 5, 0, 45456465464, 'Something went wrong. I''m so sorry little fellow.'),
+(5, '2017-04-03', '2017-06-01', 3, 1, NULL, NULL),
+(6, '2017-05-15', '2017-06-02', 5, 0, 45456465464, 'Something went wrong. I''m so sorry little fellow.');
 
 -- --------------------------------------------------------
 
@@ -143,6 +155,18 @@ CREATE TABLE IF NOT EXISTS `reports_tests` (
   KEY `id_test` (`id_test`),
   KEY `id_report` (`id_report`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `reports_tests`
+--
+
+INSERT INTO `reports_tests` (`id_test`, `id_report`) VALUES
+(1, 2),
+(1, 4),
+(2, 1),
+(2, 3),
+(3, 5),
+(3, 6);
 
 -- --------------------------------------------------------
 
@@ -185,22 +209,25 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   KEY `assignee` (`assignee`),
   KEY `priority` (`priority`),
   KEY `status` (`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tasks`
 --
 
 INSERT INTO `tasks` (`id`, `title`, `author`, `assignee`, `description`, `priority`, `status`) VALUES
-(1, 'Run Bandwidth Regression', 'mica', 'jeca', 'Run bandwidth regression on count 5 using 2 licences.dfgfdgdfg', 1, 2),
-(2, 'Task2', 'peca', 'goca', 'Some task description.', 2, 2),
+(1, 'Run Bandwidth Regression', 'mica', 'jeca', 'Run bandwidth regression on count 5 using 2 licences.dfgfdgdfg', 1, 1),
+(2, 'Task2', 'mica', 'goca', 'Some task description.', 2, 2),
 (3, 'Neki task', 'peca', 'joca', 'Ovo je opis nekog taska. Visokog prioriteta. Dodajem izmene.', 2, 1),
-(6, 'Evo jos jedan zadatak', 'peca', 'joca', 'Ovaj task cu da dodelim Joci i bice veoma niskog prioriteta. \nTakoreci bleja. :)', 3, 2),
-(9, 'Yet Another Task For Batman', 'mica', 'goca', 'Task for Baaaaataman! Confidential. menjam nesto Evo piseeeeeeeeemmmm Dragana', 3, 3),
+(6, 'Evo jos jedan zadatak', 'peca', 'joca', 'Ovaj task cu da dodelim Joci i bice veoma niskog prioriteta. \r\nTakoreci bleja. :)', 3, 2),
+(9, 'Yet Another Task For Batman', 'peca', 'goca', 'Task for Baaaaataman! Confidential. menjam nesto Evo piseeeeeeeeemmmm Dragana', 3, 3),
 (10, 'testiranje kreiranja taskova na nasoj Jiri', 'peca', 'joca', 'lalalalalallal And lalalalala', 2, 1),
 (11, 'Problem dupliranja koda mora da se resi', 'peca', 'jeca', 'Neki opis, zamislite ovde. Moze da bude i dugacak recimo. Mada sta pisati toliko dugo. Hm... Nije dovoljno dugo. Evo ti jos, da popunimo i jos jos jos.', 1, 1),
 (13, 'Populisanje polja ako te vrati zbog greske', 'peca', 'jeca', 'Znaci kada recimo  se ne unese description da ostala polja budu popunjena.', 1, 1),
-(15, 'Evo jedan skroz bezveze', 'peca', 'goca', 'Samo da proverim redirect.', 3, 2);
+(15, 'Evo jedan skroz bezveze', 'peca', 'goca', 'Samo da proverim redirect.', 3, 2),
+(16, 'neki nov', 'peca', 'joca', 'sdfsdfsdfsdfsdfs', 2, 2),
+(17, 'Novi zadatak sa testovima', 'mica', 'goca', 'Ovo je isprobavanje kreiranja nekog taska sa testovima inicijalno. Hopefully it will work first time. :)', 1, 1),
+(18, 'task task ', 'mica', 'goca', 'breee bre bre bre bre berberberbre', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -223,7 +250,17 @@ CREATE TABLE IF NOT EXISTS `tasks_tests` (
 INSERT INTO `tasks_tests` (`task_id`, `test_id`) VALUES
 (1, 1),
 (1, 4),
-(3, 5);
+(2, 3),
+(3, 5),
+(6, 2),
+(6, 4),
+(9, 1),
+(9, 2),
+(10, 3),
+(10, 8),
+(18, 1),
+(18, 7),
+(18, 9);
 
 -- --------------------------------------------------------
 
@@ -242,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `tests` (
   PRIMARY KEY (`id`),
   KEY `author` (`author`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tests`
@@ -256,7 +293,8 @@ INSERT INTO `tests` (`id`, `title`, `author`, `group_id`, `path`, `description`,
 (5, 'neki test title', 'pavle', 1, 'neki test/test', 'Ovo je neki test', '2017-06-04'),
 (7, 'hgmghmgh', 'pavle', 1, 'fgjghjgjghjghjgh', 'gjghjghjghjghj', '0000-00-00'),
 (8, 'Verovatno dobar test', 'peca', 3, 'hej/hej/hej', 'Tralalala tralallalala Opis', '0000-00-00'),
-(9, 'Test name 2', 'peca', 2, '/blab/bla/bla', 'Ovo je neki test sample.', '0000-00-00');
+(9, 'Test name 2', 'peca', 2, '/blab/bla/bla', 'Ovo je neki test sample.', '0000-00-00'),
+(10, 'jgjfgjfgjf', 'pavle', 2, 'testst/tsetset/tset', 'estsegsegesgsdgdfhdf fdg dfgdf g  gdf gdf gd gdf df df gdf', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -281,10 +319,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`username`, `Name`, `Surname`, `password`, `email`, `imageUrl`, `role`, `approved`) VALUES
+('admin', 'Admin', 'Admin', 'admin123', 'admin@gmail.com', 'http://static.boredpanda.com/blog/wp-content/uuuploads/cute-baby-animals/cute-baby-animals-17.jpg', 'admin', 1),
 ('goca', 'Gorica', 'Goric', 'goca123', 'goca@gmail.com', 'https://s-media-cache-ak0.pinimg.com/736x/14/76/71/1476718f02b6038645a26ffcb844b1f8.jpg', 'junior', 1),
 ('jeca', 'Jelena', 'Jelenic', 'jeca123', 'jeca@gmail.com', 'https://s-media-cache-ak0.pinimg.com/originals/17/07/71/170771cfc1964a5155fcaa0624ba5749.jpg', 'junior', 1),
 ('joca', 'Jovan', 'Jovanovic', 'joca123', 'joca@gmail.com', 'https://s-media-cache-ak0.pinimg.com/originals/7b/48/4b/7b484ba2e5892516a06b758669dc5a7a--baby-beagle-baby-dogs.jpg', 'junior', 0),
-('mica', 'Milica', 'Milicic', 'mica123', 'mica@gmail.com', 'https://s-media-cache-ak0.pinimg.com/originals/0f/d8/93/0fd893fe69df88bfa8bc84cf1d497563.jpg', 'senior', 0),
+('mica', 'Milica', 'Milicic', 'mica123', 'mica@gmail.com', 'https://s-media-cache-ak0.pinimg.com/236x/72/8b/bc/728bbca6c78c868e9c2b2e4402261229.jpg', 'senior', 0),
 ('misa', 'Misa', 'Misic', 'misa123', 'misa@gmail.com', 'https://s-media-cache-ak0.pinimg.com/originals/cc/5e/56/cc5e56ac246abfaed70d5ff2e0deca91.jpg', 'junior', 0),
 ('pavle', 'Pavle', 'Pavlekic', 'pavle123', 'pavle@gmail.com', 'https://s-media-cache-ak0.pinimg.com/736x/e4/45/2c/e4452cc8ef5d6dac58d8b0b0aa290ac8.jpg', 'senior', 1),
 ('peca', 'Petar', 'Petrovic', 'peca123', 'peca@gmail.com', 'https://s-media-cache-ak0.pinimg.com/736x/31/94/88/319488b64c14adb603ead90fac8f17fc.jpg', 'senior', 1);

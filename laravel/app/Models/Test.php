@@ -19,5 +19,10 @@ class Test extends Model
     public function tasks(){
         return $this->belongsToMany('App\Test', 'tasks_tests', 'test_id', 'test_id');
     }
+
+    public function reports(){
+        return $this->belongsToMany('App\Report', 'reports_tests', 'id_test', 'id_report');
+    }
+
     public $timestamps = false;
 }

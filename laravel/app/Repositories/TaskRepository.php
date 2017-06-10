@@ -44,10 +44,19 @@ class TaskRepository{
      */
     public function create($request){
         $newTask = $request->all();
+        $testsToAdd = $newTask['addedTests'];
+        unset($newTask['addedTests']);
         unset($newTask['_token']);
         $newTask['author'] = session('username');
         $task = new Task($newTask);
         $task->save();
+
+        foreach ($testsToAdd as $test) {
+            if (!$task->tests->contains($test)) {
+                $task->tests()->attach($test, ['test_id' => $test]);
+            }
+        }
+        $task->push();
         return;
     }
 

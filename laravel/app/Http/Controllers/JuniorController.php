@@ -54,7 +54,7 @@ class JuniorController extends Controller{
         //$data['firstName'] = $user['Name'];
         //$data['secondName'] = $user['Surname'];
         //dd($data);
-        return view('junior/home')->with('data',$data);
+        return view('user/home')->with('data',$data);
     }
 
     public function tasks(){
