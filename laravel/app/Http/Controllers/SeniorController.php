@@ -29,19 +29,6 @@ class SeniorController extends Controller{
         $this->testRepo = $testRepo;
     }
 
-    private function getUserData(){
-        $username = session('username');
-        if($username == null) return null;
-        $user = $this->userRepo->find($username);
-        if ($user != null) {
-            $data['firstName'] = $user['Name'];
-            $data['secondName'] = $user['Surname'];
-            $data['avatar'] = $user['imageUrl'];
-            return $data;
-        }
-        return null;
-    }
-
     private function getTasksData($data){
         $data['tasks'] = $this->taskRepo->getAll();
         $data['juniors'] = $this->userRepo->getJuniors();
@@ -56,7 +43,7 @@ class SeniorController extends Controller{
 
     public function tasks(){
 //        dd($this->taskRepo->getAll());
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         $selected = 0;
@@ -69,21 +56,21 @@ class SeniorController extends Controller{
     }
 
     public function tests(){
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         return view('senior/tests')->with('data',$data);
     }
 
     public function createTask(){
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         return view('senior/createTask')->with('data',$data);
     }
 
     public function getTask($id){
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         $selected = $this->taskRepo->getTests($id);
@@ -108,7 +95,7 @@ class SeniorController extends Controller{
     }
 
     public function createTest(){
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
         $data['tests'] = $this->testRepo->getAll();
         $data['groups'] = Group::all()->toArray();
         return view('senior/createTest')->with('data',$data);
@@ -127,9 +114,9 @@ class SeniorController extends Controller{
     }
 
     public function notifications(){
-        $data = $this->getUserData();
-        //dd($data);
+        $data = $this->userRepo->getUserData();
         $data["notifications"] = Notification::all();
+        return view('junior/home')->with('data',$data);
     }
 
     public function getTests(Request $request){
@@ -139,10 +126,8 @@ class SeniorController extends Controller{
 //        return $request;
     }
 
-
-
     public function searchTasks(Request $request){
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
         $data = $this->getTasksData($data);
         $r = $request->all();
         $results = $this->taskRepo->search($r);

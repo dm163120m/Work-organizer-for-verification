@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 use App\Task;
+use App\Tasks_Tests;
 
 class TaskRepository{
     protected $model;
@@ -62,7 +63,13 @@ class TaskRepository{
         $task->status = $editedTask["status"];
         $task->priority = $editedTask["priority"];
         $task->assignee = $editedTask["assignee"];
-        $task->save();
+
+        foreach ($editedTask['addedTests'] as $test) {
+            if (!$task->tests->contains($test)) {
+                $task->tests()->attach($test, ['test_id' => $test]);
+            }
+        }
+        $task->push();
         return;
     }
 

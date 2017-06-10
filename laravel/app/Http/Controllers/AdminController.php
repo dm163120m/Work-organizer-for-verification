@@ -57,25 +57,15 @@ class AdminController extends Controller {
 		return view('back.filemanager', compact('url'));
 	}
 
-	private function getUserData(){
-        $username = session('username');
-        $user = $this->user_gestion->find($username);
-        if ($user != null) {
-            $data['firstName'] = $user['Name'];
-            $data['secondName'] = $user['Surname'];
-            $data['avatar'] = $user['imageUrl'];
-        }
-        return $data;
-    }
 	public function requests()
 	{
-		$data = $this->getUserData();
+		$data = $this->user_gestion->getUserData();
 		$data['users'] = $this->user_gestion->getAll();
 		return view('admin/requests')->with('data',$data);
 	}
 	public function users()
 	{
-		$data = $this->getUserData();
+		$data = $this->user_gestion->getUserData();
 		$data['users'] = $this->user_gestion->getAll();
 		return view('admin/users')->with('data',$data);
 	}

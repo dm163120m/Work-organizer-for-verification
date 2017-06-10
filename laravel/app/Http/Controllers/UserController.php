@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UserRepository as UserRepo;
-
+use Session;
 
 class UserController extends Controller{
     private $userRepo;
@@ -13,13 +13,7 @@ class UserController extends Controller{
     }
 
     private function getUserData(){
-        $username = session('username');
-        $user = $this->userRepo->find($username);
-        if ($user != null) {
-            $data['firstName'] = $user['Name'];
-            $data['secondName'] = $user['Surname'];
-            $data['avatar'] = $user['imageUrl'];
-        }
+        $data = $this->userRepo->getUserData();
         return $data;
     }
 
@@ -29,7 +23,10 @@ class UserController extends Controller{
         return view('user/editprofile')->with('data',$data);
     }
 
-
+    public function logOut(){
+        Session::flush();
+        return redirect('login');
+    }
 
     
 }

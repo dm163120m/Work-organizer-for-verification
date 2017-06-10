@@ -18,7 +18,7 @@
     </div>
     <div class="userOptions hidden" id="userOptions">
         <a href="/editprofile#" class="col-md-12 userOption">Edit Profile</a>
-        <a href="#" class="col-md-12 userOption">Log Out</a>
+        <a href="/logout" class="col-md-12 userOption">Log Out</a>
     </div>
     <script>
         var showUserOptions = function()

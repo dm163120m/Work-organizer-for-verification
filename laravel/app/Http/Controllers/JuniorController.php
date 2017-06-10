@@ -26,34 +26,29 @@ class JuniorController extends Controller{
         $this->testRepo = $testRepo;
     }
 
+    private function getTasksData($data){
+        $data['tasks'] = $this->taskRepo->getAll();
+        $data['juniors'] = $this->userRepo->getJuniors();
+        $data['seniors'] = $this->userRepo->getSeniors();
+        $data['priorities'] = Priority::all()->toArray();
+        $data['statuses'] = Status::all()->toArray();
+        $data['groupsTests'] = Group::with('tests')->get()->toArray();
+        $data['groups'] = Group::all()->toArray();
+        $data['tests'] = $this->testRepo->getAll();
+        return $data;
+    }
+
     public function home(){
 //        dd($this->taskRepo->find('1'));
 //        dd(Priority::all()->toArray());
         $data['tasks'] = $this->taskRepo->getAll();
-        $username = session('username');
-        $user = $this->userRepo->find($username);
-        if($user != null) {
-            $data['firstName'] = $user['Name'];
-            $data['secondName'] = $user['Surname'];
-            $data['avatar'] = $user['imageUrl'];
-        }
+        $data = $this->userRepo->getUserData();
 
         return view('junior/home')->with('data',$data);
     }
 
-    private function getUserData(){
-        $username = session('username');
-        $user = $this->userRepo->find($username);
-        if ($user != null) {
-            $data['firstName'] = $user['Name'];
-            $data['secondName'] = $user['Surname'];
-            $data['avatar'] = $user['imageUrl'];
-        }
-        return $data;
-    }
-
     public function notifications() {
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
         $data["notifications"] = Notification::all();
         //dd($data);
         //$data['firstName'] = $user['Name'];
@@ -64,46 +59,33 @@ class JuniorController extends Controller{
 
     public function tasks(){
 //        dd($this->taskRepo->getAll());
-        $data = $this->getUserData();
-        $data['tasks'] = $this->taskRepo->getAll();
-        $data['juniors'] = $this->userRepo->getJuniors();
-        $data['priorities'] = Priority::all()->toArray();
-        $data['statuses'] = Status::all()->toArray();
-
+        $data = $this->userRepo->getUserData();
+        if($data == null) return redirect('login');
+        $data = $this->getTasksData($data);
         $selected = 0;
         if(count($data['tasks']) > 0) $selected = $this->taskRepo->getTests(1);
         return view('junior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
     public function getTask($id){
-        $data = $this->getUserData();
-        $data['tasks'] = $this->taskRepo->getAll();
-        $data['juniors'] = $this->userRepo->getJuniors();
-        $data['priorities'] = Priority::all()->toArray();
-        $data['statuses'] = Status::all()->toArray();
-
+        $data = $this->userRepo->getUserData();
+        if($data == null) return redirect('login');
+        $data = $this->getTasksData($data);
         $selected = $this->taskRepo->getTests($id);
-
-//        dd($selected);
-//        $post = Task::find($id);
-//        $post->tests()->attach($image_ids);
         return view('junior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
     public function tests(){
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
 //        dd($this->taskRepo->getAll());
-        $data['tasks'] = $this->taskRepo->getAll();
-        $data['juniors'] = $this->userRepo->getJuniors();
-        $data['groups'] = Group::all()->toArray();
-        $data['groupsTests'] = Group::with('tests')->get()->toArray();
-        $data['tests'] = $this->testRepo->getAll();
+        $data = $this->getTasksData($data);
+
         //dd($data);
         return view('senior/tests')->with('data',$data);
     }
 
     public function createTest(){
-        $data = $this->getUserData();
+        $data = $this->userRepo->getUserData();
         $data['tests'] = $this->testRepo->getAll();
         $data['groups'] = Group::all()->toArray();
         return view('junior/createTest')->with('data',$data);

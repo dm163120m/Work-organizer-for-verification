@@ -1,4 +1,4 @@
-@extends('junior/tasksTemplate')
+@extends('senior/tasksTemplate')
 
 @section('page')
     @if($errors->has())

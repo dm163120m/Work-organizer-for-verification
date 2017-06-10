@@ -1,4 +1,4 @@
-@extends('template')
+@extends('page_template')
 
 @section('sidebar')
         <div class="sidebar-nav col-md-12">

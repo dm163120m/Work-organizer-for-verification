@@ -152,11 +152,11 @@
                         el.className = "test";
                         el.id = checked[k]['id'];
                         el.innerHTML=checked[k]['title'];
-                        el.type="checkbox";
-                        el.value=checked[k]['id'];
-                        el.name = "addedTests[]";
                         var hiddenIn = document.createElement("input");
                         hiddenIn.id = checked[k]['id'];
+                        hiddenIn.type="checkbox";
+                        hiddenIn.value=checked[k]['id'];
+                        hiddenIn.name = "addedTests[]";
                         hiddenIn.checked =true;
                         hiddenIn.setAttribute("hidden", true);
                         pel.appendChild(el);

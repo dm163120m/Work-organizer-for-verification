@@ -10,7 +10,6 @@
         {!! csrf_field() !!}
         <div id="create_new_task">
             <h2 class="page-title col-md-11">Create new task</h2>
-            <p class="indexer col-md-1">TSK#5</p>
             <div style="margin-top:15px;" class="group col-md-12">
                 <p class="col-md-2" style="font-size:28px;" type="label">Title:<b style="color:red;">*</b></p>
                 <input style="font-size:28px; margin-top:-5px;" class="col-md-10" type="text" id="title" name="title"/>

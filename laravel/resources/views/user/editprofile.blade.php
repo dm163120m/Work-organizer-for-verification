@@ -1,4 +1,4 @@
-@extends('template')
+@extends('page_template')
 
 <div class="content">
     @section('header')

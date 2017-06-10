@@ -59,7 +59,7 @@ class LoginController extends Controller
                 $request->session()->put('username', $attributes['username']);
                 if($attributes['role'] == 'junior') return redirect('/junior/home');
                 else  if($attributes['role'] == 'senior') return redirect('/senior/home');
-                else return redirect('/admin');
+                else return redirect('/admin/requests');
             }
         }
 
