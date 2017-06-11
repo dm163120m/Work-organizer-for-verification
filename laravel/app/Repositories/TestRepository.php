@@ -10,7 +10,7 @@ class TestRepository{
     }
 
     public function getAll(){
-        $all = Test::with('group_id', 'author')->get();
+        $all = Test::with('group_id', 'author', 'reports')->get();
         return $all->toArray();
     }
 

@@ -5,12 +5,12 @@
         <h2 class="page-title col-md-12">All tests</h2>
         <table style="" class="col-md-12 tabela">
             <tr>
-                <th />
+                <th> Title </th>
                 <th> Author </th>
                 <th> Status </th>
                 <th> Path </th>
                 <th> Group </th>
-                <th> Comment </th>
+                <th> Last failure description </th>
             </tr>
             @foreach ($data['tests'] as $test)
                 <tr>
@@ -19,9 +19,12 @@
                     <td class="positive"> </td>
                     <td> {{$test['path']}} </td>
                     <td> {{$test['group_id']['name']}} </td>
-                    <td> {{$test['description']}} </td>
+                    @if ((count($test['reports'])!= 0)&&(end($test['reports'])['status'] == 0))
+                        <td> {{end($test['reports'])['fail_description']}} <td>
+                    @endif
                 </tr>
             @endforeach
         </table>
     </div>
+
 @endsection

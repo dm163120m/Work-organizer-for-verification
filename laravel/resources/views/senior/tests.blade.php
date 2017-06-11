@@ -13,7 +13,7 @@
             <p class="indexer col-md-1">TST#{{$selected['id']}}</p>
             <div class="group col-md-12">
 
-                <p class="col-md-12" style="color:#95989A;">Date of latest change: {{$selected['created']}} </p>
+                <p class="col-md-12" style="color:#95989A;">Date of latest change: {{end($selected['reports'])['latest_run']}} </p>
             </div>
             <div class="group col-md-12">
                 <p class="col-md-2">Author:</p>
