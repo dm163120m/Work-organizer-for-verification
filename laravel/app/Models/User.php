@@ -1,4 +1,8 @@
 <?php
+/**
+ * Milica Djordjevic 2016/3120
+ * Dragana Spasic 2016/3256
+ */
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;

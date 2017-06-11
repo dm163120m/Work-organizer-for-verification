@@ -1,3 +1,4 @@
+{{-- Milica Djordjevic 2016/3120 --}}
 @extends('auth_template')
 
 	<div class="content">

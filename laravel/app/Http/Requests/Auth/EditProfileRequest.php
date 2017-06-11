@@ -1,4 +1,7 @@
 <?php
+/**
+ * Milica Djordjevic 2016/3120
+ */
 namespace App\Http\Requests\Auth;
 use App\Http\Requests\Request;
 class EditProfileRequest extends Request{

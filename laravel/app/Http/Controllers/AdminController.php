@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
-
+/**
+ * Milica Djordjevic 2016/3120
+ * Dragana Spasic 2016/3256
+ */
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
