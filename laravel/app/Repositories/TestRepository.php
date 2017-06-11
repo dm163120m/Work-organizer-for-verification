@@ -62,6 +62,15 @@ class TestRepository{
         return;
     }
 
+    public function update($request){
+        $editedTest = $request->all();
+        $test = Test::find($editedTest["id"]);
+        $test->group_id = $editedTest["group_id"];
+        $test->path = $editedTest["path"];
+        $test->push();
+        return;
+    }
+
     /**
      * @return Test
      */

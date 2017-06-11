@@ -87,9 +87,15 @@ class JuniorController extends Controller{
 
     public function createTest(){
         $data = $this->userRepo->getUserData();
-        $data['tests'] = $this->testRepo->getAll();
-        $data['groups'] = Group::all()->toArray();
-        return view('junior/createTest')->with('data',$data);
+        $data = $this->getTasksData($data);
+        return view('senior/createTest')->with('data',$data);
+    }
+
+    public function updateTest(Request $request)
+    {
+//        dd($request->all());
+        $this->testRepo->update($request);
+        return redirect('/junior/tests');
     }
 
     /**

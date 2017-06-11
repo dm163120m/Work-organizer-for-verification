@@ -29,6 +29,8 @@ Route::post('/senior/create_task_post', 'SeniorController@createTaskPost');
 Route::get('/senior/create_task', 'SeniorController@createTask');
 Route::post('/senior/create_test_post', 'SeniorController@createTestPost');
 Route::get('/senior/create_test', 'SeniorController@createTest');
+Route::post('/junior/create_test_post', 'JuniorController@createTestPost');
+Route::get('/junior/create_test', 'JuniorController@createTest');
 Route::get('/admin/requests', 'AdminController@requests');
 Route::get('/admin/users', 'AdminController@users');
 Route::get('/editprofile', 'UserController@editProfile');
