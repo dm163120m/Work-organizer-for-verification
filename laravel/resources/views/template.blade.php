@@ -44,8 +44,13 @@
         @yield('sidebar')
     </div>
     <div class="content">
-        <div class="col-md-2" style="padding-right:0px; padding-top:44px;">
-            @yield('list')
+        <div class="col-md-2" style="padding-right:0px; padding-top:0px;">
+            <div class="col-md-12" style="min-height:44px;">
+                @yield('listheader')
+            </div>
+            <div class="col-md-12" style="padding-right:0px;">
+                @yield('list')
+            </div>
         </div>
         <div class="col-md-7" style="padding-left:0px;">
             <div class="col-md-12">

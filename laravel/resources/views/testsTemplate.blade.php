@@ -4,8 +4,11 @@
     @parent
 @endsection
 
+@section('listheader')
+    <a href="/{{$data['role']}}/tests"><p class="" style="font-size:22px; padding-top: -44px;cursor:pointer;"><i style="font-size:30px"  class="fa fa-list-ol"></i> Show all tests</p></a>
+@endsection
+
 @section('list')
-    <a href="/{{$data['role']}}/tests"><p class="" style="font-size:22px; padding-top: -44px;cursor:pointer;">Show all tests</p></a>
     <div class="sidebar-tsk col-md-12" style="padding:0px; margin:0px;">
         <div class="lista col-md-12" style="padding:0px; margin:0px;">
             <ul class="tasks_ul">
@@ -14,12 +17,12 @@
                         <p class="col-md-12" style="font-size:18px">{{$group['name'] }}</p>
                     </li>
                     @foreach ($group['tests'] as $test)
+                    <a href="/{{$data['role']}}/tests/{{ $test['id']}}" }}>
                         <li class="task_li col-md-12" style="padding:10px 0px 00px 0px;">
-                            <a href="/{{$data['role']}}/tests/{{ $test['id']}}" }}>
                                 <p class="col-md-12" style="font-size:18px"><b>{{$test['title'] }}</b></p>
                                 <p class="col-md-12" style="font-size:18px">{{$test['author'] }}</p>
-                            </a>
                         </li>
+                    </a>
                     @endforeach
                 @endforeach
             </ul>

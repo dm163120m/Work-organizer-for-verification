@@ -186,7 +186,7 @@ a:visited {
     width:100%;
     margin:0px;
     padding:0px;
-    
+
 }
 .formselect{
     height:35px;
@@ -203,7 +203,7 @@ a:visited {
     padding: 0px;
     display:block;
     height:105vh;
-    background-color: #b5aea3; 
+    background-color: #b5aea3;
     font-size: 15px;
     border-color: #888a85;
     text-align: center;
@@ -215,7 +215,7 @@ a:visited {
     background-color: #95989A;
 }
 .sidebar-tsk a:hover {
-    
+
 }
 .task_li{
     border-bottom: 1px solid whitesmoke;
@@ -392,8 +392,13 @@ button#modal_add_reports {
 }
 
 .report{
-    border: 1px solid #bbbfc6;
+
     padding: 10px;
     margin-top: 15px;
     padding-right: 0px;
+}
+.notificationItem{
+    margin-top:10px;
+    border: 0px solid #888a85;
+    border-bottom-width: 1px;
 }

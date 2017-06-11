@@ -29,6 +29,7 @@
                     <td> {{$test['group_id']['name']}} </td>
                     @if ((count($test['reports'])!= 0)&&(end($test['reports'])['status'] == 0))
                         <td> {{end($test['reports'])['fail_description']}} <td>
+                    @else <td> </td>
                     @endif
                 </tr>
             @endforeach
