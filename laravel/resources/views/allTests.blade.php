@@ -16,7 +16,15 @@
                 <tr>
                     <td><b>{{$test['title']}}</b></td>
                     <td> {{$test['author']['Name']}} {{$test['author']['Surname']}} </td>
-                    <td class="positive"> </td>
+                    @if (count($test['reports'])!= 0)
+                        @if (end($test['reports'])['status'] == 0)
+                             <td class="positive"> PASSED </td>
+                        @else
+                            <td class="negative"> NOT PASSED </td>
+                        @endif
+                    @else
+                        <td> No report</td>
+                    @endif
                     <td> {{$test['path']}} </td>
                     <td> {{$test['group_id']['name']}} </td>
                     @if ((count($test['reports'])!= 0)&&(end($test['reports'])['status'] == 0))
