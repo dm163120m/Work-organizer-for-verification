@@ -13,5 +13,6 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         '/get_tests',
+        '/junior/add_reports'
     ];
 }

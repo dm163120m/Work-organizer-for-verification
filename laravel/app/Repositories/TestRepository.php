@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories;
+use App\Report;
 use App\Test;
 
 class TestRepository{
@@ -59,5 +60,36 @@ class TestRepository{
         $test = new Test($newTest);
         $test->save();
         return;
+    }
+
+    /**
+     * @return Test
+     */
+    public function addReports($arrayTests, $report){
+        $reportM = new Report($report);
+        $reportM->tests()->attach($report, ['id_report' => $report]);
+        foreach ($arrayTests as $test) {
+            $test->reports()->attach($report, ['id_report' => $report]);
+        }
+//        $test = Test::find($editedTask["id"]);
+//        $task->author = session('username');
+//        $task->title = $editedTask["title"];
+//        $task->description = $editedTask["description"];
+//        $task->status = $editedTask["status"];
+//        $task->priority = $editedTask["priority"];
+//        $task->assignee = $editedTask["assignee"];
+//        if(array_key_exists ('comment', $editedTask)) {
+//            $comment = new Comment();
+//            $comment->username = session('username');
+//            $comment->comment = $editedTask['comment'];
+//            $task->comments()->save($comment);
+//        }
+//
+//        foreach ($editedTask['addedTests'] as $test) {
+//            if (!$task->tests->contains($test)) {
+//                $task->tests()->attach($test, ['test_id' => $test]);
+//            }
+//        }
+//        $task->push();
     }
 }

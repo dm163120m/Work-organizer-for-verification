@@ -10,6 +10,7 @@ use App\Repositories\TestRepository as TestRepo;
 use App\Notification;
 use App\Status;
 use App\Group;
+use Illuminate\Http\Request;
 
 class JuniorController extends Controller{
 
@@ -101,6 +102,20 @@ class JuniorController extends Controller{
         //dd($request);
         $this->testRepo->create($request);
         return redirect('/junior/tests');
+    }
+
+    public function addReports(Request $request){
+//        dd($request);
+        $this->testRepo->addReports($request->all());
+        return response()->json(['res' => $request->all()['tests_array']]);
+    }
+
+    public function searchTasks(Request $request){
+        $data = $this->userRepo->getUserData();
+        $data = $this->getTasksData($data);
+        $r = $request->all();
+        $results = $this->taskRepo->search($r);
+        return view('senior/searchTasks')->with('results', $results)->with('data', $data);
     }
 
 }

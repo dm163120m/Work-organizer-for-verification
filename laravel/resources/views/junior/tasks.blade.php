@@ -6,7 +6,7 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="post" action="{{ url('junior/update_task') }}" >
+    <form method="post" action="{{ url('junior/update_task') }}" onsubmit="getQuillData()">
         {!! csrf_field() !!}
         <div id="view_task">
             <h2 class="page-title col-md-10">{{$selected['title']}}</h2>
@@ -56,7 +56,7 @@
                             <div class="group col-md-12" style="margin:0px; padding:0px">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-9" style="margin:0px; padding:0px">
-                                    <input class="col-md-1" style="color:#888a85; border-color:black;" type = "checkbox"  value="{{$test['id']}}" name="status[]" />
+                                    <input class="col-md-1" style="color:#888a85; border-color:black;" type = "checkbox"  id="{{$test['id']}}" name="checkedReports[]" />
                                     <p class="col-md-11" style="font-size:16px;"> {{$test['title']}}</p>
                                 </div>
                             </div>
@@ -69,15 +69,20 @@
             </div>
 
             <div class="group col-md-12">
-                <p class="col-md-6" type="label">Senior Comment:</p>
-                <p style="color: #95989A;" class="col-md-8"; >This regression needs to be run from work folder.</p>
+                @if(count($selected['comments']) > 0)
+                    <p>Comments: </p>
+                @endif
+                @foreach($selected['comments'] as $comment)
+                    <p>{{$comment['username']}}: {!! $comment['comment'] !!} </p>
+                @endforeach
             </div>
             <div class="group col-md-12">
-                <p class="col-md-12" type="label">Comment:</p>
+                <p class="col-md-12" type="label">Add Comment:</p>
                 <div class="col-md-12">
-                    <div id="comment2" style="height:100px;">
+                    <div id="commentF" style="height:150px;">
                         <p></p>
                     </div>
+                    <input id="comment" name="comment" hidden />
                 </div>
             </div>
             <div class="group col-md-12">
@@ -93,56 +98,116 @@
                     <div class="group">
                         <div class="col-md-12">
                             <p class="col-md-5">Date of latest change:</p>
-                            <input class="col-md-7" type="date">
+                            <input class="col-md-7" type="date" name="latest_change" id="latest_change">
                         </div>
                         <div class="col-md-12">
                             <p class="col-md-5">Date of latest run:</p>
-                            <input class="col-md-7" type="date">
+                            <input class="col-md-7" type="date" name="latest_run" id="latest_run">
                         </div>
                         <div class="col-md-12">
                             <p class="col-md-5">Number of running in regresion:</p>
-                            <input class="col-md-7" type="number" id="title" name="title"/>
+                            <input class="col-md-7" type="number" name="count" id="count">
                         </div>
                         <div class="col-md-12">
                             <p class="col-md-5" type="label">Status:</p>
-                            <select class="formselect col-md-7" name="status">
-                                @foreach ($data['statuses'] as $status)
-                                    <option value={{$status['id']}} {{ $selected['status']['status'] == $status['status'] ? 'selected="selected"' : '' }}>
-                                        {{$status['status']}}
-                                    </option>
-                                @endforeach
+                            <select class="formselect col-md-7" name="status" id="status">
+                                <option value="" disabled selected>Select Status</option>
+                                <option value="0" >PASSED</option>
+                                <option value="1" >NOT PASSED</option>
                             </select>
                         </div>
                         <div class="groupedTests col-md-12">
                             <div class="col-md-12">
                                 <p class="col-md-5">Seed:</p>
-                                <input class="col-md-7" type="number" id="title" name="title"/>
+                                <input class="col-md-7" type="number" id="seed" name="seed"/>
                             </div>
                             <div class="col-md-12">
                                 <p class="col-md-12">Failure Description:</p>
                                 <div class="col-md-12">
-                                    <textarea name="description" id="description" style="width:100%;max-width:100%;height:200px;"></textarea>
+                                    <textarea name="fail_description" id="fail_description" style="width:100%;max-width:100%;height:200px;"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {!! csrf_field() !!}
+                <div style="height:100px;">
+                    <div class="col-md-6"></div>
+                    <Button id="addReports" class="formbutton col-md-6" style="height: 45px; margin-top:15px;">Add</Button>
+                </div>
             </div>
         </div>
     </form>
     <script>
-        var commentEditor2 = new Quill('#comment2', {
+        var commentEditor = new Quill('#commentF', {
             modules: {
                 toolbar: [
                     [{ header: [1, 2, false] }],
-                    ['bold', 'italic', 'underline'],
-                    ['image', 'code-block']
+                    ['bold', 'italic', 'underline']
                 ]
             },
             placeholder: 'Compose an epic...',
             theme: 'snow'  // or 'bubble'
         });
+        function getQuillData(){
+            var body = document.querySelector('input[name=comment]');
+            body.value = commentEditor.root.innerHTML;
+        }
+        var addBtton = document.getElementById("addReports");
+        addBtton.onclick = function () {
+            event.preventDefault();
+            var checkedTests =  document.getElementsByName("checkedReports[]");
+            var chklength = checkedTests.length;
+            var checkedTestsArray=[];
+            for(k=0;k< chklength;k++){
+                if(checkedTests[k].checked == true){
+                    checkedTestsArray.push(checkedTests[k].id);
+                }
+            }
+            console.log(checkedTestsArray);
+            var report ={
+                'latest_change' : document.getElementById("latest_change").value,
+                'latest_run' : document.getElementById("latest_run").value,
+                'count' : document.getElementById("count").value,
+                'seed' : document.getElementById("status").value,
+                'fail_description' : document.getElementById("status").value,
+                'status' : document.getElementById("status").value
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8000/junior/add_reports/',
+                dataType: "json",
+                data: { 'tests_array' : checkedTestsArray, 'report' : report},
+                success: function(response) {
+                    console.log(response);
+//                    var testsDiv = document.getElementById("tests");
+//                    var checked = response.returnedTests;
+//                    var modalgroups = document.getElementById("modal-groups");
+//                    for(k=0; k<checked.length ;k++){
+//                        var pel = document.createElement("div");
+//                        pel.className = "col-md-4";
+//                        var el = document.createElement("div");
+//                        el.className = "test";
+//                        el.id = checked[k]['id'];
+//                        el.innerHTML=checked[k]['title'];
+//                        var hiddenIn = document.createElement("input");
+//                        hiddenIn.id = checked[k]['id'];
+//                        hiddenIn.type="checkbox";
+//                        hiddenIn.value=checked[k]['id'];
+//                        hiddenIn.name = "addedTests[]";
+//                        hiddenIn.checked =true;
+//                        hiddenIn.setAttribute("hidden", true);
+//                        pel.appendChild(el);
+//                        pel.appendChild(hiddenIn);
+//                        testsDiv.appendChild(pel);
+//                        var c_test = document.getElementById('test_li'+checked[k]['id']);
+//                        modalgroups.removeChild(c_test);
+//                    }
+                },error:function(){
+                    console.log('greska');
+                }
+            });
+            modal.style.display = "none";
+        }
         var modal = document.getElementById('myModal');
         var btn = document.getElementById("modal_add_reports");
         var span = document.getElementsByClassName("close")[0];

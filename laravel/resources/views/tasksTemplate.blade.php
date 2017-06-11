@@ -60,47 +60,33 @@
             </div>
             <p style="margin-left:10px; margin-top:20px; font-size:18px;" class="col-md-12">Select Priority</p>
             <div class="group col-md-4" style="margin:0px; padding:0px">
-                <div class="col-md-1" style="margin:0px; padding:0px">
-                    <input style="color:#888a85; border-color:black;" type = "checkbox" value="{{$data['priorities'][0]['id']}}" name="priority[]" />
-                </div>
-                <p class="col-md-10" style="font-size:16px;"> High</p>
+                <input type="checkbox" id="checkbox01" class="css-checkbox lrg" value="{{$data['priorities'][0]['id']}}" name="priority[]"/>
+				<label for="checkbox01" name="checkbox69_lbl" class="css-label lrg vlad">High</label>
             </div>
             <div class="group col-md-5" style="margin:0px; padding:0px">
-                <div class="col-md-1" style="margin:0px; padding:0px">
-                    <input style="color:#888a85; border-color:black;" type = "checkbox" value="{{$data['priorities'][1]['id']}}" name="priority[]" />
-                </div>
-                <p class="col-md-11" style="font-size:16px;"> Medium</p>
+                <input type="checkbox" id="checkbox02" class="css-checkbox lrg" value="{{$data['priorities'][1]['id']}}" name="priority[]" />
+				<label for="checkbox02" name="checkbox69_lbl" class="css-label lrg vlad">Medium</label>
             </div>
             <div class="group col-md-3" style="margin:0px; padding:0px">
-                <div class="col-md-2" style="margin:0px; padding:0px">
-                    <input style="color:#888a85; border-color:black;" type = "checkbox" value="{{$data['priorities'][2]['id']}}" name="priority[]" />
-                </div>
-                <p class="col-md-10" style="font-size:16px;"> Low</p>
+                <input type="checkbox" id="checkbox03" class="css-checkbox lrg" value="{{$data['priorities'][2]['id']}}" name="priority[]" />
+				<label for="checkbox03" name="checkbox69_lbl" class="css-label lrg vlad">Low</label>
             </div>
             <p style="margin-left:10px; margin-top:20px; font-size:18px;" class="col-md-12">Select Status</p>
             <div class="group col-md-12" style="margin:0px; padding:0px">
-                <div class="col-md-1" style="margin:0px; padding:0px">
-                    <input style="color:#888a85; border-color:black;" type = "checkbox"  value="{{$data['statuses'][0]['id']}}" name="status[]" />
-                </div>
-                <p class="col-md-10" style="font-size:16px;"> Created</p>
+                <input type="checkbox" id="checkbox04" class="css-checkbox lrg" value="{{$data['statuses'][0]['id']}}" name="status[]" />
+				<label for="checkbox04" name="checkbox69_lbl" class="css-label lrg vlad">Created</label>
             </div>
             <div class="group col-md-12" style="margin:0px; padding:0px">
-                <div class="col-md-1" style="margin:0px; padding:0px">
-                    <input style="color:#888a85; border-color:black;" type = "checkbox"  value="{{$data['statuses'][1]['id']}}" name="status[]" />
-                </div>
-                <p class="col-md-10" style="font-size:16px;"> In Progress</p>
+                <input type="checkbox" id="checkbox05" class="css-checkbox lrg" value="{{$data['statuses'][1]['id']}}" name="status[]" />
+				<label for="checkbox05" name="checkbox69_lbl" class="css-label lrg vlad">In Progress</label>
             </div>
             <div class="group col-md-12" style="margin:0px; padding:0px">
-                <div class="col-md-1" style="margin:0px; padding:0px">
-                    <input style="color:#888a85; border-color:black;" type = "checkbox"  value="{{$data['statuses'][3]['id']}}" name="status[]" />
-                </div>
-                <p class="col-md-10" style="font-size:16px;"> Done</p>
+                <input type="checkbox" id="checkbox06" class="css-checkbox lrg" value="{{$data['statuses'][3]['id']}}" name="status[]" />
+				<label for="checkbox06" name="checkbox69_lbl" class="css-label lrg vlad">Done</label>
             </div>
             <div class="group col-md-12" style="margin:0px; padding:0px">
-                <div class="col-md-1" style="margin:0px; padding:0px">
-                    <input style="color:#888a85; border-color:black;" type = "checkbox"  value="{{$data['statuses'][2]['id']}}" name="status[]" />
-                </div>
-                <p class="col-md-10" style="font-size:16px;"> On Hold</p>
+                <input type="checkbox" id="checkbox07" class="css-checkbox lrg" value="{{$data['statuses'][2]['id']}}" name="status[]" />
+				<label for="checkbox07" name="checkbox69_lbl" class="css-label lrg vlad">On Hold</label>
             </div>
             <div class="group col-md-12" style="margin:0px; margin-top:30px; padding:0px">
                 <div class="col-md-2"></div>

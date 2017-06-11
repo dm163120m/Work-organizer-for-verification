@@ -89,20 +89,19 @@
                 <span class="close">&times;</span>
                 <div class="modal-inner">
                     <h2>Add Tests to Task</h2>
-                    @foreach ($data['groupsTests'] as $group)
-                        <div>
-                            <p style="font-size:18px;">{{$group['name']}}</p>
-                        </div>
-                        @foreach ($group['tests'] as $test)
-                            <div class="group col-md-12" style="margin:0px; padding:0px">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-9" style="margin:0px; padding:0px">
-                                    <input class="col-md-1" style="color:#888a85; border-color:black;" type = "checkbox" onChange="" value="{{$test['id']}}" name="status[]" />
-                                    <p class="col-md-11" style="font-size:16px;"> {{$test['title']}}</p>
-                                </div>
-                            </div>
+                    <ul class="modal-groups" id="modal-groups">
+                        @foreach ($data['groupsTests'] as $group)
+                            <h3>{{$group['name'] }}</h3>
+                            @foreach ($group['tests'] as $test)
+                                @if(!checkIfInArray($test, $selected['tests']))
+                                    <li>
+                                    <li id="test_li{{$test['id']}}">
+                                        <input id="{{$test['id']}}" type="checkbox" value="{{$test['id']}}" name="checkedTests[]" onChange="">{{$test['title'] }}
+                                    </li>
+                                @endif
+                            @endforeach
                         @endforeach
-                    @endforeach
+                    </ul>
                     <input name="task_id" value="{{$selected['id']}}" hidden />
                     <div style="height:100px;">
                         <div class="col-md-6"></div>
@@ -152,7 +151,6 @@
                 dataType: "json",
                 data: { 'tests_array' : checkedTestsArray},
                 success: function(response) {
-                    console.log(response.returnedTests);
                     var testsDiv = document.getElementById("tests");
                     var checked = response.returnedTests;
 					var modalgroups = document.getElementById("modal-groups");
