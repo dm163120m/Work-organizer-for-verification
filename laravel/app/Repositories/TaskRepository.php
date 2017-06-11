@@ -99,4 +99,18 @@ class TaskRepository{
         return;
     }
 
+    public function updateByJunior($request){
+        $editedTask = $request->all();
+        $task = Task::find($editedTask["id"]);
+        $task->status = $editedTask["status"];
+        if(array_key_exists ('comment', $editedTask)) {
+            $comment = new Comment();
+            $comment->username = session('username');
+            $comment->comment = $editedTask['comment'];
+            $task->comments()->save($comment);
+        }
+        $task->push();
+        return;
+    }
+
 }

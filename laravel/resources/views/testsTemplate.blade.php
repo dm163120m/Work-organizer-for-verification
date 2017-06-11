@@ -69,8 +69,8 @@
             <div class="group col-md-12">
                 <select class="formselect col-md-12 filterInput" name="status">
                     <option value="" disabled selected>Select Status</option>
-                    <option value="0" >PASSED</option>
-                    <option value="1" >NOT PASSED</option>
+                    <option value="1" >PASSED</option>
+                    <option value="0" >NOT PASSED</option>
                 </select>
             </div>
 

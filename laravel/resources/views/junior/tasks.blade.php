@@ -55,9 +55,11 @@
                         @foreach ($group['tests'] as $test)
                             <div class="group col-md-12" style="margin:0px; padding:0px">
                                 <div class="col-md-1"></div>
-                                <div class="col-md-9" style="margin:0px; padding:0px">
-                                    <input class="col-md-1" style="color:#888a85; border-color:black;" type = "checkbox"  id="{{$test['id']}}" name="checkedReports[]" />
-                                    <p class="col-md-11" style="font-size:16px;"> {{$test['title']}}</p>
+                                <div class="col-md-9" style="margin:0px; padding:0px" id="parentTests{{$test['id']}}">
+                                    <div id="test_div_{{$test['id']}}">
+                                        <input class="col-md-1" style="color:#888a85; border-color:black;" type = "checkbox"  id="{{$test['id']}}" name="checkedReports[]" />
+                                        <p class="col-md-11" style="font-size:16px;" id="testName{{$test['id']}}"> {{$test['title']}}</p>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -112,8 +114,8 @@
                             <p class="col-md-5" type="label">Status:</p>
                             <select class="formselect col-md-7" name="status" id="status">
                                 <option value="" disabled selected>Select Status</option>
-                                <option value="0" >PASSED</option>
-                                <option value="1" >NOT PASSED</option>
+                                <option value="1" >PASSED</option>
+                                <option value="0" >NOT PASSED</option>
                             </select>
                         </div>
                         <div class="groupedTests col-md-12">
@@ -163,7 +165,6 @@
                     checkedTestsArray.push(checkedTests[k].id);
                 }
             }
-            console.log(checkedTestsArray);
             var report ={
                 'latest_change' : document.getElementById("latest_change").value,
                 'latest_run' : document.getElementById("latest_run").value,
@@ -172,36 +173,24 @@
                 'fail_description' : document.getElementById("status").value,
                 'status' : document.getElementById("status").value
             };
+            console.log(checkedTestsArray);
             $.ajax({
                 type: 'POST',
                 url: 'http://localhost:8000/junior/add_reports/',
                 dataType: "json",
                 data: { 'tests_array' : checkedTestsArray, 'report' : report},
                 success: function(response) {
-                    console.log(response);
-//                    var testsDiv = document.getElementById("tests");
-//                    var checked = response.returnedTests;
-//                    var modalgroups = document.getElementById("modal-groups");
-//                    for(k=0; k<checked.length ;k++){
-//                        var pel = document.createElement("div");
-//                        pel.className = "col-md-4";
-//                        var el = document.createElement("div");
-//                        el.className = "test";
-//                        el.id = checked[k]['id'];
-//                        el.innerHTML=checked[k]['title'];
-//                        var hiddenIn = document.createElement("input");
-//                        hiddenIn.id = checked[k]['id'];
-//                        hiddenIn.type="checkbox";
-//                        hiddenIn.value=checked[k]['id'];
-//                        hiddenIn.name = "addedTests[]";
-//                        hiddenIn.checked =true;
-//                        hiddenIn.setAttribute("hidden", true);
-//                        pel.appendChild(el);
-//                        pel.appendChild(hiddenIn);
-//                        testsDiv.appendChild(pel);
-//                        var c_test = document.getElementById('test_li'+checked[k]['id']);
-//                        modalgroups.removeChild(c_test);
-//                    }
+                    for(j=0;j< checkedTestsArray.length ;j++){
+//                        var parentTests = document.getElementById('parentTests'+checkedTestsArray[j]);
+                        var testName = document.getElementById('testName'+checkedTestsArray[j]);
+//                        var newtext = testName.innerHTML + ' -  Report Added';
+                        testName.innerHTML = testName.innerHTML + ' -  Report Added';
+                        var testdiv = document.getElementById('test_div_'+checkedTestsArray[j]);
+//                        parentTests.removeChild(testdiv);
+//                        var newDiv = document.createElement("div");
+//                        newDiv.innerHTML = newtext;
+//                        parentTests.appendChild(newDiv);
+                    }
                 },error:function(){
                     console.log('greska');
                 }

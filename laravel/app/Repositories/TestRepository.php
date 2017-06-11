@@ -67,9 +67,16 @@ class TestRepository{
      */
     public function addReports($arrayTests, $report){
         $reportM = new Report($report);
-        $reportM->tests()->attach($report, ['id_report' => $report]);
-        foreach ($arrayTests as $test) {
-            $test->reports()->attach($report, ['id_report' => $report]);
+//        $reportM->latest_change = $report['latest_change'];
+//        $reportM->latest_run = $report['latest_run'];
+//        $reportM->count = $report['count'];
+//        $reportM->seed = $report['seed'];
+//        $reportM->fail_description = $report['fail_description'];
+        $reportM->save();
+        foreach ($arrayTests as $test_id) {
+            $test = Test::find($test_id);
+            $test->reports()->attach($reportM->id, ['id_report' => $reportM->id]);
+            $test->push();
         }
 //        $test = Test::find($editedTask["id"]);
 //        $task->author = session('username');
@@ -90,6 +97,5 @@ class TestRepository{
 //                $task->tests()->attach($test, ['test_id' => $test]);
 //            }
 //        }
-//        $task->push();
     }
 }

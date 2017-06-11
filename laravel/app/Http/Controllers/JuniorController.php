@@ -106,8 +106,9 @@ class JuniorController extends Controller{
 
     public function addReports(Request $request){
 //        dd($request);
-        $this->testRepo->addReports($request->all());
-        return response()->json(['res' => $request->all()['tests_array']]);
+        $r = $request->all();
+        $this->testRepo->addReports($r['tests_array'], $r['report']);
+        return response()->json(['success' => 'true']);
     }
 
     public function searchTasks(Request $request){
@@ -117,5 +118,34 @@ class JuniorController extends Controller{
         $results = $this->taskRepo->search($r);
         return view('senior/searchTasks')->with('results', $results)->with('data', $data);
     }
+
+    public function updateTaskJunior(Request $request)
+    {
+//        dd($request->all());
+        $this->taskRepo->updateByJunior($request);
+        return redirect('/junior/tasks');
+    }
+
+    public function searchTests(Request $request)
+    {
+        $data = $this->userRepo->getUserData();
+        $data = $this->getTasksData($data);
+        $r = $request->all();
+//        dd($r);
+        $results = $this->testRepo->search($r);
+//        dd($results);
+
+        return view('senior/searchTests')->with('results', $results)->with('data', $data);
+    }
+
+    public function getTest($id)
+    {
+        $data = $this->userRepo->getUserData();
+        if ($data == null) return redirect('login');
+        $data = $this->getTasksData($data);
+        $selected = $this->testRepo->getById($id);
+        return view('senior/tests')->with('data', $data)->with('selected', $selected);
+    }
+
 
 }
