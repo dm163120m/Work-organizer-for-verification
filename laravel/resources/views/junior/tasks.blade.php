@@ -168,7 +168,7 @@
                 'latest_run' : document.getElementById("latest_run").value,
                 'count' : document.getElementById("count").value,
                 'seed' : document.getElementById("status").value,
-                'fail_description' : document.getElementById("status").value,
+                'fail_description' : document.getElementById("fail_description").value,
                 'status' : document.getElementById("status").value
             };
             console.log(checkedTestsArray);
