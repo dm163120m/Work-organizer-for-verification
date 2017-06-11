@@ -10,8 +10,6 @@ use App\Priority;
 use App\Status;
 use App\Group;
 use App\Notification;
-use App\Task;
-use App\Tasks_Tests;
 use Illuminate\Http\Request;
 
 class SeniorController extends Controller

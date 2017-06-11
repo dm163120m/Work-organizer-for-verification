@@ -6,7 +6,7 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="post" action="{{ url('/senior/create_test_post') }}" >
+    <form method="post" action="{{ url('/'.$data['role'].'/create_test_post') }}" >
         {!! csrf_field() !!}
         <div id="create_new_test">
             <h2 class="page-title col-md-11">Create new test</h2>
@@ -42,17 +42,4 @@
             </div>
         </div>
     </form>
-    <script>
-        var descriptionEditor = new Quill('#description', {
-            modules: {
-                toolbar: [
-                    [{ header: [1, 2, false] }],
-                    ['bold', 'italic', 'underline'],
-                    ['image', 'code-block']
-                ]
-            },
-            placeholder: 'Compose an epic...',
-            theme: 'snow'  // or 'bubble'
-        });
-    </script>
 @endsection

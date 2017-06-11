@@ -38,7 +38,7 @@
 <div class="errorMsg center">{{ $error }}</div>
 @endforeach
 @endif
-<form method="post" action="{{ url('/senior/create_test_post') }}" >
+<form method="post" action="{{ url('/'.$data['role'].'/create_test_post') }}" >
     {!! csrf_field() !!}
     <div class="hidden" id="create_new_test">
         <h2 class="page-title col-md-11">Create new test</h2>
@@ -126,7 +126,7 @@
 @section('filter')
     <div class="col-md-1"></div>
     <div class="col-md-10">
-        <form method="get" action="{{ url('/senior/search_tasks') }}" >
+        <form method="get" action="{{ url('/'.$data['role'].'/search_tasks') }}" >
             <h3 style="margin-left:30px; margin-top:80px; font-size:20px;">Search Filters</h3>
             <div style="margin-top:15px;" class="group col-md-12">
                 <input class="col-md-12 filterInput" type="text" id="task_id" name="task_id" placeholder="Task ID" />

@@ -39,7 +39,7 @@
         <form method="get" action="{{ url('/'.$data['role'].'/search_tasks') }}" >
             <h3 style="margin-left:30px; margin-top:80px; font-size:20px;">Search Filters</h3>
             <div style="margin-top:15px;" class="group col-md-12">
-                <input class="col-md-12 filterInput" type="text" id="task_id" name="task_id" placeholder="Task ID" />
+                <input class="col-md-12 filterInput" type="text" id="task_id" name="task_id" placeholder="Test ID" />
             </div>
             <div class="group col-md-12">
                 <input class="col-md-12 filterInput" type="text" id="title" name="title" placeholder="Title" />
@@ -62,6 +62,14 @@
             </div>
             <div class="group col-md-12">
                 <input class="col-md-12 filterInput" type="text" id="path" name="path" placeholder="Path" />
+            </div>
+            <div class="group col-md-12">
+                <select class="formselect col-md-12 filterInput" name="status">
+                    <option value="" disabled selected>Select Status</option>
+                    @foreach ($data['statuses'] as $status)
+                        <option value={{$status['id']}} >{{$status['status']}}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="group col-md-12" style="margin:0px; margin-top:30px; padding:0px">

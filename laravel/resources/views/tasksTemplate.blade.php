@@ -34,7 +34,7 @@
 @section('filter')
     <div class="col-md-1"></div>
     <div class="col-md-10">
-        <form method="get" action="{{ url('/senior/search_tasks') }}" >
+        <form method="get" action="{{ url('/'.$data['role'].'/search_tasks') }}" >
             <h3 style="margin-left:30px; margin-top:80px; font-size:20px;">Search Filters</h3>
             <div style="margin-top:15px;" class="group col-md-12">
                 <input class="col-md-12 filterInput" type="text" id="task_id" name="task_id" placeholder="Task ID" />

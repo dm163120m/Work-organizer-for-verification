@@ -390,3 +390,10 @@ button#modal_add_reports {
 .lista.col-md-12 {
     overflow: overlay;
 }
+
+.report{
+    border: 1px solid #bbbfc6;
+    padding: 10px;
+    margin-top: 15px;
+    padding-right: 0px;
+}

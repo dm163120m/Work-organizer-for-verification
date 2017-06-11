@@ -82,7 +82,7 @@ class JuniorController extends Controller{
         $data = $this->getTasksData($data);
 
         //dd($data);
-        return view('senior/tests')->with('data',$data);
+        return view('junior/tests')->with('data',$data);
     }
 
     public function createTest(){

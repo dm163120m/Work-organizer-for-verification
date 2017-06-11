@@ -6,7 +6,7 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="post" action="{{ url('/senior/create_task_post') }}" onsubmit="getQuillData()">
+    <form method="post" action="{{ url('/'.$data['role'].'/create_task_post') }}" onsubmit="getQuillData()">
         {!! csrf_field() !!}
         <div id="create_new_task">
             <h2 class="page-title col-md-11">Create new task</h2>
