@@ -58,7 +58,7 @@ class SeniorController extends Controller
         $data = $this->userRepo->getUserData();
         if ($data == null) return redirect('login');
         $data = $this->getTasksData($data);
-        return view('senior/allTests')->with('data', $data);
+        return view('allTests')->with('data', $data);
     }
 
     public function createTask()

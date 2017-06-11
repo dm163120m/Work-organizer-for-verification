@@ -76,13 +76,12 @@ class JuniorController extends Controller{
         return view('junior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
-    public function tests(){
+    public function tests()
+    {
         $data = $this->userRepo->getUserData();
-//        dd($this->taskRepo->getAll());
+        if ($data == null) return redirect('login');
         $data = $this->getTasksData($data);
-
-        //dd($data);
-        return view('junior/tests')->with('data',$data);
+        return view('allTests')->with('data', $data);
     }
 
     public function createTest(){
