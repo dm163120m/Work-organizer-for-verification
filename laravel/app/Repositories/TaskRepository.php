@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories;
+use App\Report;
 use App\Comment;
 use App\Task;
 use App\Tasks_Tests;
@@ -83,7 +84,7 @@ class TaskRepository{
         $task->status = $editedTask["status"];
         $task->priority = $editedTask["priority"];
         $task->assignee = $editedTask["assignee"];
-        if(array_key_exists ('comment', $editedTask)) {
+        if((array_key_exists ('comment', $editedTask))&&($editedTask['comment']== '')) {
             $comment = new Comment();
             $comment->username = session('username');
             $comment->comment = $editedTask['comment'];
