@@ -56,6 +56,11 @@ class LoginController extends Controller
         if($user != null){
             $attributes = $user->getAttributes();
             if($attributes['password'] == $password){
+                if($attributes['approved'] == 0) {
+                    return redirect('login')
+                        ->with('msg', 'Your account has not been approved yet. Administrator has to approve your account.')
+                        ->withInput($request->only('username'));
+                }
                 $request->session()->put('username', $attributes['username']);
                 if($attributes['role'] == 'junior') return redirect('/junior/home');
                 else  if($attributes['role'] == 'senior') return redirect('/senior/home');

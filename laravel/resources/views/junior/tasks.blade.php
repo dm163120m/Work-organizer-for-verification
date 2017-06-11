@@ -6,6 +6,7 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
+    @if($selected != 0)
     <form method="post" action="{{ url('junior/update_task') }}" onsubmit="getQuillData()">
         {!! csrf_field() !!}
         <div id="view_task">
@@ -133,6 +134,9 @@
             </div>
         </div>
     </form>
+    @else
+        <div class="col-md-12"><h2>You don't have tasks assigned to you currently.</h2></div>
+    @endif
     <script>
         var commentEditor = new Quill('#commentF', {
             modules: {
