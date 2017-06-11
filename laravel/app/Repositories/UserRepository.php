@@ -48,4 +48,16 @@ class UserRepository {
         return;
     }
 
+    public function search($data){
+        //dd($data);
+        $conditions = [];
+            //dd($user);
+            if ($data['name'] != null AND $data['name'] != "") $conditions[] = ['Name', 'LIKE', '%' . $data['name'] . '%'];
+            if (array_key_exists('role', $data)) $conditions[] = ['role', '=', $data['role']];
+        //dd($conditions);
+        $res = User::where($conditions)->get()->toArray();
+        //dd($res);
+        return $res;
+    }
+
 }

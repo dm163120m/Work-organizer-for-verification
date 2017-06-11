@@ -4,6 +4,7 @@ use App\Repositories\ContactRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\BlogRepository;
 use App\Repositories\CommentRepository;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller {
 
@@ -23,6 +24,7 @@ class AdminController extends Controller {
     public function __construct(UserRepository $user_gestion)
     {
 		$this->user_gestion = $user_gestion;
+
     }
 
 	/**
@@ -69,4 +71,14 @@ class AdminController extends Controller {
 		$data['users'] = $this->user_gestion->getAll();
 		return view('admin/users')->with('data',$data);
 	}
+
+    public function searchUsers(Request $request){
+//        $data["users"] =  $this->user_gestion->getAll();
+        //dd($request->all());
+        $results = $this->user_gestion->search($request->all());
+        //dd($results);
+        $data = $this->user_gestion->getUserData();
+        $data['results']= $results;
+        return view('admin/searchUsers')->with('results', $results)->with('data', $data);;
+    }
 }

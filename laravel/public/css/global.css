@@ -161,6 +161,8 @@ a:visited {
     background-color: #95989A;
 }
 .page{
+    overflow: auto;
+    height:1000px;
     background-color: #FFFFFF;
     min-height: 800px;
 }
@@ -199,10 +201,11 @@ a:visited {
     height:60px;
 }
 .sidebar-tsk {
+    overflow: auto;
+    height:1000px;
     margin: 0px;
     padding: 0px;
     display:block;
-    height:105vh;
     background-color: #b5aea3;
     font-size: 15px;
     border-color: #888a85;
