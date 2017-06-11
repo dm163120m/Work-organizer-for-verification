@@ -48,21 +48,15 @@
             </div>
             <div class="group col-md-8">
                 <div class="groupedTests col-md-12">
-                    @foreach ($data['groupsTests'] as $group)
-                        <div class="col-md-12">
-                            <p style="font-size:18px;">{{$group['name']}}</p>
-                        </div>
-                        @foreach ($group['tests'] as $test)
+                    @foreach ($selected['tests'] as $test)
                             <div class="group col-md-12" style="margin:0px; padding:0px">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-9" style="margin:0px; padding:0px" id="parentTests{{$test['id']}}">
+                                <div class="col-md-12" style="margin:0px; padding:0px" id="parentTests{{$test['id']}}">
                                     <div id="test_div_{{$test['id']}}">
                                         <input class="col-md-1" style="color:#888a85; border-color:black;" type = "checkbox"  id="{{$test['id']}}" name="checkedReports[]" />
                                         <p class="col-md-11" style="font-size:16px;" id="testName{{$test['id']}}"> {{$test['title']}}</p>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
                     @endforeach
                 </div>
             </div>

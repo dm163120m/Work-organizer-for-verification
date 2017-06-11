@@ -64,7 +64,6 @@ class JuniorController extends Controller{
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         $selected = 0;
-        //dd($data);
         if(count($data['tasks']) > 0) $selected = $this->taskRepo->getTests(1);
         return view('junior/tasks')->with('data',$data)->with('selected', $selected);
     }
@@ -74,6 +73,7 @@ class JuniorController extends Controller{
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         $selected = $this->taskRepo->getTests($id);
+        //dd($selected);
         return view('junior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
@@ -126,6 +126,13 @@ class JuniorController extends Controller{
         return redirect('/junior/tasks');
     }
 
+    public function updateTestJunior(Request $request)
+    {
+//        dd($request->all());
+        $this->testRepo->update($request);
+        return redirect('/junior/tests');
+    }
+
     public function searchTests(Request $request)
     {
         $data = $this->userRepo->getUserData();
@@ -144,7 +151,7 @@ class JuniorController extends Controller{
         if ($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         $selected = $this->testRepo->getById($id);
-        return view('senior/tests')->with('data', $data)->with('selected', $selected);
+        return view('junior/tests')->with('data', $data)->with('selected', $selected);
     }
 
 

@@ -35,6 +35,8 @@ Route::get('/editprofile', 'UserController@editProfile');
 Route::post('/editprofile', 'UserController@editProfilePost');
 Route::post('/senior/update_task', 'SeniorController@updateTask');
 Route::post('/junior/update_task', 'JuniorController@updateTaskJunior');
+Route::post('/senior/update_test', 'SeniorController@updateTest');
+Route::post('/junior/update_test', 'JuniorController@updateTestJunior');
 Route::post('/register', 'Auth\RegisterController@registerPost');
 Route::get('/senior/home', 'SeniorController@notifications');
 Route::post('/get_tests', 'SeniorController@getTests');
@@ -49,5 +51,7 @@ Route::get('/junior/tests', 'JuniorController@tests');
 Route::get('/senior/home', 'SeniorController@notifications');
 Route::get('/logout', 'UserController@logout');
 Route::post('/junior/add_reports', 'JuniorController@addReports');
-
+Route::get('/admin/approve_user{id}', 'AdminController@approveUser');
+Route::get('/admin/approve_user/{username}', 'AdminController@approveUser');
+Route::get('/admin/reject_user/{username}', 'AdminController@rejectUser');
 

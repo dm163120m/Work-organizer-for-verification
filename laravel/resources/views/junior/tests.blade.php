@@ -11,8 +11,8 @@
         <div id="update_test">
             <h2 class="page-title col-md-11">{{$selected['title']}}</h2>
             <p class="indexer col-md-1">TST#{{$selected['id']}}</p>
+            <input type="text" value="{{$selected['id']}}" name="id" hidden />
             <div class="group col-md-12">
-
                 <p class="col-md-12" style="color:#95989A;">Date of latest change: {{end($selected['reports'])['latest_run']}} </p>
             </div>
             <div class="group col-md-12">
@@ -31,10 +31,8 @@
                     <p class="col-md-2" style="font-size:16px;" type="label">Path:<b style="color:red;">*</b></p>
                     <input style="font-size:20px; margin-top:-5px;" class="col-md-5" type="text" name="path" value={{$selected['path']}} />
                     <div class="col-md-5" style="padding:0px; margin:0px;">
-                        <div class="col-md-3"></div>
-                        <input class="col-md-4 formbutton" style="height:35px; margin-top:-5px;" type = "submit" value="Save" />
-                        <div class="col-md-1"></div>
-                        <input class="col-md-4 formbutton" style="height:35px; margin-top:-5px;" type = "submit" value="Delete" />
+                        <div class="col-md-7"></div>
+                        <input class="col-md-5 formbutton" style="height:35px; margin-top:-5px;" type = "submit" value="Save" />
                     </div>
                 </div>
             </div>

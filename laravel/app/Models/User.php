@@ -19,10 +19,13 @@ class User extends Model implements AuthenticatableContract{
         'password', 'remember_token',
     ];
 
+    protected $primaryKey = 'username';
+
     public function tasks(){
         return $this->hasMany('App\Task', 'id');
     }
 
     public $timestamps = false;
+    public $incrementing = false;
     
 }

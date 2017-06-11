@@ -1,6 +1,6 @@
 <?php
 namespace App\Repositories;
-use App\Report;
+use App\Report;		   
 use App\Comment;
 use App\Task;
 use App\Tasks_Tests;

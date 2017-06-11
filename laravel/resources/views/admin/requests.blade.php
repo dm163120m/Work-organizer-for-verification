@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="col-md-4"></div>
-                    <p class="col-md-4" style="color:#235021; font-size:36px; text-align:center;"> <i class="fa fa-check"></i> </p>
-                    <p class="col-md-4" style="color:red; font-size:36px; text-align:center;"> <i class="fa fa-close"></i> </p>
+                    <p class="col-md-4" style="color:#235021; font-size:36px; text-align:center;"> <a href="/admin/approve_user/{{$user['username']}}" ><i class="fa fa-check"></i> </a></p>
+                    <p class="col-md-4" style="color:red; font-size:36px; text-align:center;">  <a href="/admin/reject_user/{{$user['username']}}"> <i class="fa fa-close"></i> </a> </p>
                 </div>
             </div>
         @endif

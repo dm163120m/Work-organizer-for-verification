@@ -107,6 +107,13 @@ class SeniorController extends Controller
         return redirect('/senior/tasks');
     }
 
+    public function updateTest(Request $request)
+    {
+//        dd($request->all());
+        $this->testRepo->update($request);
+        return redirect('/senior/tests');
+    }
+
     public function createTest()
     {
         $data = $this->userRepo->getUserData();

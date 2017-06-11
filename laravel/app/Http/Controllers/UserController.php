@@ -30,8 +30,9 @@ class UserController extends Controller{
     }
 
     public function editProfilePost(EditProfileRequest $request){
-        $this->userRepo->editUser($request);
-        return view('user/editprofile')
+        $this->userRepo->updateUser($request);
+        $data = $this->getUserData();
+        return view('user/editprofile')->with('data',$data)
             ->with('msg', 'You successfully edited your profile!!');
     }
 
