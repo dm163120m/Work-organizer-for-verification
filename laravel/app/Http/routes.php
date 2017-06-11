@@ -60,4 +60,5 @@ Route::post('/junior/add_reports', 'JuniorController@addReports');
 Route::get('/admin/approve_user{id}', 'AdminController@approveUser');
 Route::get('/admin/approve_user/{username}', 'AdminController@approveUser');
 Route::get('/admin/reject_user/{username}', 'AdminController@rejectUser');
-
+Route::get('/admin/delete/{username}', 'AdminController@deleteUser');
+Route::get('/admin/invert_act/{username}', 'AdminController@invertAct');

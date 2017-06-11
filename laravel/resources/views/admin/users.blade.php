@@ -21,11 +21,12 @@
                     <div class="col-md-8" style="padding-top:15px;">
                         <div class="col-md-2"></div>
                         <div class="col-md-2">
-                            <input style="color:#888a85; border-color:black;" type = "checkbox" />
+                            <input style="color:#888a85; border-color:black;" type = "checkbox" id="activated" name="activated" onchange="window.location='{{ url('/admin/invert_act/'.$user['username'])}}'"
+                                   @if($user['approved'] == 1) checked @endif/>
                         </div>
                         <p class="col-md-8"> Activated</p>
                     </div>
-                    <input class="col-md-4 formbutton" style="margin-bottom:30px;" type = "submit" value="Delete" />
+                    <Button class="col-md-4 formbutton" style="margin-bottom:30px;" onclick="window.location='{{ url('/admin/delete/'.$user['username'])}}'" value="">Delete</Button>
                 </div>
             </div>
             @endif

@@ -53,7 +53,7 @@ class AdminController extends Controller {
 		$this->user_gestion->reject($username);
 		$data = $this->user_gestion->getUserData();
 		$data['users'] = $this->user_gestion->getAll();
-//		return redirect('admin/requests')->with($data);
+		return redirect('admin/requests')->with($data);
 	}
 
 	public function approveUser($username){
@@ -62,4 +62,19 @@ class AdminController extends Controller {
 		$data['users'] = $this->user_gestion->getAll();
 		return redirect('admin/requests')->with($data);
 	}
+
+	public function deleteUser($username){
+		$this->user_gestion->reject($username);
+		$data = $this->user_gestion->getUserData();
+		$data['users'] = $this->user_gestion->getAll();
+		return redirect('admin/users')->with($data);
+	}
+
+	public function invertAct($username){
+		$this->user_gestion->invertActivation($username);
+		$data = $this->user_gestion->getUserData();
+		$data['users'] = $this->user_gestion->getAll();
+		return redirect('admin/users')->with($data);
+	}
+
 }
