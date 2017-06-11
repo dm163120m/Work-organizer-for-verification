@@ -150,12 +150,13 @@ class SeniorController extends Controller
 
     public function searchTests(Request $request)
     {
-        $data = $this->getTasksData([]);
+        $data = $this->userRepo->getUserData();
+        $data = $this->getTasksData($data);
         $r = $request->all();
-        //dd($r);
+//        dd($r);
         $results = $this->testRepo->search($r);
-        //dd($results);
+//        dd($results);
 
-        return view('user/searchTests')->with('results', $results)->with('data', $data);
+        return view('senior/searchTests')->with('results', $results)->with('data', $data);
     }
 }

@@ -1,6 +1,5 @@
 <?php
 namespace App\Repositories;
-use App\Group;
 use App\Test;
 
 class TestRepository{
@@ -31,13 +30,22 @@ class TestRepository{
         $conditions = [];
         if($data['test_id'] != null AND $data['test_id'] != "") $conditions[] = ['id', '=', $data['test_id']];
         if($data['title'] != null AND $data['title'] != "") $conditions[] = ['title' , 'LIKE', '%'.$data['title'].'%'];
-        if(array_key_exists ('author', $data) AND $data['author'] != "") $conditions[] = ['author' , '=', $data['author']];
-        if(array_key_exists ('group', $data) AND $data['group'] != "") $conditions[] = ['group' , '=', $data['group']];
+        if(array_key_exists ('author', $data)) $conditions[] = ['author' , '=', $data['author']];
+        if(array_key_exists ('group_id', $data)) $conditions[] = ['group_id' , '=', $data['group_id']];
         if($data['path'] != null AND $data['path'] != "") $conditions[] = ['path' , 'LIKE', '%'.$data['path'].'%'];
-        if(array_key_exists ('statuses', $data) AND $data['statuses'] != "") $conditions[] = ['statuses' , '=', $data['statuses']];
-        $query = Test::where($conditions);
-        //dd($conditions);
-        return $query->get()->toArray();
+
+//        $tests = Test::with('Reports')->where($conditions)->whereHas('Reports', function($q){
+//            $q->where('status', '0');
+//        })->get();
+
+        $res = Test::where($conditions)->with('reports')->get()->toArray();
+        if(array_key_exists ('status', $data)){
+            foreach ($res as $key => $test){
+                $last_report = end($test['reports']);
+                if($last_report['status'] != $data['status']) unset($res[$key]);
+            }
+        }
+        return $res;
     }
 
     /**
@@ -47,6 +55,7 @@ class TestRepository{
         $newTest = $request->all();
         unset($newTest['_token']);
         $newTest['author'] = session('username');
+        $newTest['created'] = date('Y-m-d H:i:s');
         $test = new Test($newTest);
         $test->save();
         return;
