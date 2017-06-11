@@ -6,7 +6,7 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="post" action="{{ url('/senior/create_task_post') }}" >
+    <form method="post" action="{{ url('/senior/create_task_post') }}" onsubmit="getQuillData()">
         {!! csrf_field() !!}
         <div id="create_new_task">
             <h2 class="page-title col-md-11">Create new task</h2>
@@ -52,11 +52,12 @@
                 </div>
             </div>
             <div class="group col-md-12">
-                <p class="col-md-12" type="label">Comment:</p>
+                <p class="col-md-12" type="label">Add Comment:</p>
                 <div class="col-md-12">
-                    <div id="comment" style="height:150px;">
+                    <div id="commentF" style="height:150px;">
                         <p></p>
                     </div>
+                    <input id="comment" name="comment" hidden />
                 </div>
             </div>
             <div class="group col-md-12">
@@ -89,17 +90,20 @@
         </div>
     </form>
 <script>
-    var commentEditor = new Quill('#comment', {
+    var commentEditor = new Quill('#commentF', {
         modules: {
             toolbar: [
                 [{ header: [1, 2, false] }],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
+                ['bold', 'italic', 'underline']
             ]
         },
         placeholder: 'Compose an epic...',
         theme: 'snow'  // or 'bubble'
     });
+    function getQuillData(){
+        var body = document.querySelector('input[name=comment]');
+        body.value = commentEditor.root.innerHTML;
+    }
     var modal = document.getElementById('myModal');
     var btn = document.getElementById("modal_add_tests");
     var span = document.getElementsByClassName("close")[0];

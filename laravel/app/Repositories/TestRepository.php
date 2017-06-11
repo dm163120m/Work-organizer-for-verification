@@ -27,18 +27,6 @@ class TestRepository{
         return Test::where('id', '=', $id)->with('reports', 'author')->first()->toArray();
     }
 
-    /**
-     * @return Test
-     */
-    public function create($request){
-        $newTest = $request->all();
-        unset($newTest['_token']);
-        $newTest['author'] = session('username');
-        $test = new Test($newTest);
-        $test->save();
-        return;
-    }
-
     public function search($data){
         $conditions = [];
         if($data['test_id'] != null AND $data['test_id'] != "") $conditions[] = ['id', '=', $data['test_id']];
@@ -50,5 +38,17 @@ class TestRepository{
         $query = Test::where($conditions);
         //dd($conditions);
         return $query->get()->toArray();
+    }
+
+    /**
+     * @return Test
+     */
+    public function create($request){
+        $newTest = $request->all();
+        unset($newTest['_token']);
+        $newTest['author'] = session('username');
+        $test = new Test($newTest);
+        $test->save();
+        return;
     }
 }

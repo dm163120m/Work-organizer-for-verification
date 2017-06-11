@@ -6,7 +6,7 @@
             <div class="errorMsg center">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="post" action="{{ url('senior/update_task') }}" name="forma">
+    <form method="post" action="{{ url('senior/update_task') }}" name="forma" id="forma" onsubmit="getQuillData()">
         {!! csrf_field() !!}
         <div id="view_task">
             <h2 class="page-title col-md-10">{{$selected['title']}}</h2>
@@ -66,15 +66,16 @@
                     <p>Comments: </p>
                 @endif
                 @foreach($selected['comments'] as $comment)
-                    <p>{{$comment['username']}}: {{$comment['comment']}}</p>
+                    <p>{{$comment['username']}}: {!! $comment['comment'] !!} </p>
                 @endforeach
             </div>
             <div class="group col-md-12">
                 <p class="col-md-12" type="label">Add Comment:</p>
                 <div class="col-md-12">
-                    <div id="comment2" style="height:150px;">
+                    <div id="commentF" style="height:150px;">
                         <p></p>
                     </div>
+                    <input id="comment" name="comment" hidden />
                 </div>
             </div>
             <div class="group col-md-12">
@@ -114,17 +115,20 @@
     </form>
 
     <script>
-        var commentEditor2 = new Quill('#comment2', {
+        var commentEditor = new Quill('#commentF', {
             modules: {
                 toolbar: [
                     [{ header: [1, 2, false] }],
-                    ['bold', 'italic', 'underline'],
-                    ['image', 'code-block']
+                    ['bold', 'italic', 'underline']
                 ]
             },
             placeholder: 'Compose an epic...',
             theme: 'snow'  // or 'bubble'
         });
+        function getQuillData(){
+            var body = document.querySelector('input[name=comment]');
+            body.value = commentEditor.root.innerHTML;
+        }
 
         var modal = document.getElementById('myModal');
         var btn = document.getElementById("modal_add_tests");

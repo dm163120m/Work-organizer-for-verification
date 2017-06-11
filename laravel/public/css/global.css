@@ -386,9 +386,7 @@ button#modal_add_reports {
     padding: 10px;
     margin-top: 15px;
     padding-right: 0px;
-}.report{
-    border: 1px solid #bbbfc6;
-    padding: 10px;
-    margin-top: 15px;
-    padding-right: 0px;
+}
+.lista.col-md-12 {
+    overflow: overlay;
 }

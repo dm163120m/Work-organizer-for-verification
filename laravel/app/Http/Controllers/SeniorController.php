@@ -48,10 +48,6 @@ class SeniorController extends Controller{
         $data = $this->getTasksData($data);
         $selected = 0;
         if(count($data['tasks']) > 0) $selected = $this->taskRepo->getTests(1);
-//            dd($selected['tests']);
-
-//        $tests = $this->testRepo->getInArray(['1', '3']);
-//        dd($tests->toArray());
         return view('senior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
@@ -74,6 +70,7 @@ class SeniorController extends Controller{
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         $selected = $this->taskRepo->getTests($id);
+//        dd($selected);
         return view('senior/tasks')->with('data',$data)->with('selected', $selected);
     }
 
@@ -82,7 +79,6 @@ class SeniorController extends Controller{
         if($data == null) return redirect('login');
         $data = $this->getTasksData($data);
         $selected = $this->testRepo->getById($id);
-        dd($selected);
         return view('senior/tests')->with('data',$data)->with('selected', $selected);
     }
 

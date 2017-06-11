@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories;
+use App\Comment;
 use App\Task;
 use App\Tasks_Tests;
 
@@ -54,6 +55,12 @@ class TaskRepository{
         $newTask['author'] = session('username');
         $task = new Task($newTask);
         $task->save();
+        if(array_key_exists ('comment', $newTask)) {
+            $comment = new Comment();
+            $comment->username = session('username');
+            $comment->comment = $newTask['comment'];
+            $task->comments()->save($comment);
+        }
 
         foreach ($testsToAdd as $test) {
             if (!$task->tests->contains($test)) {
@@ -76,6 +83,12 @@ class TaskRepository{
         $task->status = $editedTask["status"];
         $task->priority = $editedTask["priority"];
         $task->assignee = $editedTask["assignee"];
+        if(array_key_exists ('comment', $editedTask)) {
+            $comment = new Comment();
+            $comment->username = session('username');
+            $comment->comment = $editedTask['comment'];
+            $task->comments()->save($comment);
+        }
 
         foreach ($editedTask['addedTests'] as $test) {
             if (!$task->tests->contains($test)) {

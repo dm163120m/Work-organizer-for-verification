@@ -18,19 +18,19 @@
             <form class="center loginForm" method="post" action="{{ url('/register') }}" >
                 {!! csrf_field() !!}
                 <label class="labela" for="username">Username</label>
-                <input class="polja" id="username" name="username" value={{ old('username') }} /><br/>
+                <input class="polja" id="username" name="username" value={{ old('username') }} ><br/>
                 <label class="labela" for="Name">Name</label>
-                <input class="polja" id="Name" name="Name" value={{ old('Name') }} /><br/>
+                <input class="polja" id="Name" name="Name" value={{ old('Name') }} ><br/>
                 <label class="labela" for="Surname">Surname</label>
-                <input class="polja" id="Surname" name="Surname" value={{ old('Surname') }} /><br/>
+                <input class="polja" id="Surname" name="Surname" value={{ old('Surname') }} ><br/>
                 <label class="labela" for="password">Password</label>
-                <input class="polja" id="password" name="password" value="" type="password"/><br/>
-                <label class="labela" for="confirmPassword">Confirm Password</label>
-                <input class="polja" id="confirmPassword" name="confirmPassword" value="" type="password"/><br/>
+                <input class="polja" id="password" name="password" value="" type="password"><br/>
+                <label class="labela" for="password_confirmation ">Confirm Password</label>
+                <input class="polja" id="password_confirmation " name="password_confirmation" value="" type="password"><br/>
                 <label class="labela" for="email">Email</label>
-                <input class="polja" id="email" name="email" value={{ old('email') }}/><br/>
+                <input class="polja" id="email" name="email" value={{ old('email') }}><br/>
                 <label class="labela" for="imageUrl">Image</label>
-                <input class="polja" id="imageUrl" name="imageUrl" value={{ old('imageUrl') }}/><br/>
+                <input class="polja" id="imageUrl" name="imageUrl" value={{ old('imageUrl') }}><br/>
                 <select class="polja" name="role">
                     <option value="">Select role</option>
                     <option value="junior">Junior</option>
