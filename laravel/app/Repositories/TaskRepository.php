@@ -18,7 +18,7 @@ class TaskRepository{
     }
 
     public function getMyTasks($username){
-        return Task::where('assignee', '=', $username)->with('priority', 'status', 'author', 'assignee')->get()->toArray();
+        return Task::where('assignee', '=', $username)->with('priority', 'status', 'author', 'assignee', 'tests', 'comments')->get()->toArray();
     }
 
     public function find($id){

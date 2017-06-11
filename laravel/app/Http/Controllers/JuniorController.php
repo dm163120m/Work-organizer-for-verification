@@ -28,7 +28,7 @@ class JuniorController extends Controller{
     }
 
     private function getTasksData($data){
-        $data['tasks'] = $this->taskRepo->getAll();
+        $data['tasks'] = $this->taskRepo->getMyTasks(session('username'));
         $data['juniors'] = $this->userRepo->getJuniors();
         $data['seniors'] = $this->userRepo->getSeniors();
         $data['priorities'] = Priority::all()->toArray();

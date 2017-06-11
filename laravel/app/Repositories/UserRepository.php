@@ -65,8 +65,8 @@ class UserRepository {
         $user = User::where('username',$username)->first();
         $newUserData = $request->all();
         $user->email = $newUserData['email'];
-        //$user->password = $newUserData['password'];
-        //$user->imageUrl = $newUserData['imageUrl'];
+        $user->password = $newUserData['password'];
+        $user->imageUrl = $newUserData['imageUrl'];
         $user->save();
         return;
     }
